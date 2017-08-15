@@ -15,19 +15,17 @@ class App extends Component {
   }
 
   handleSubmit = (formData) => {
-    console.log('username', formData.username);
      fetch('https://httpbin.org/anything', {
       method: 'POST',
       body: JSON.stringify(formData)
     })
     .then(function(response) {
-      console.log('done');
-      return response.json();
-    }).then(function(body) {
-      console.log(body);
+      formData.router.push('/dashboard');
+    }).catch(function(err) {
+      console.log(err);
     })
   }
-  
+
   render() {
     return (
       <div className="App">
