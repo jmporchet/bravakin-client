@@ -1,39 +1,21 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import './App.css';
-import LoginForm from './components/login.component.jsx';
+import React from 'react'
+import {
+  BrowserRouter as Router,
+} from 'react-router-dom'
 
-class App extends Component {
-  constructor() {
-    super();
-  }
+import routes from './config/routes';
 
-  handleChange = (name, text) => {
-    this.setState({
-      [name]: text
-    });
-  }
+import TopMenu from './components/TopMenu'
 
-  handleSubmit = (formData) => {
-     fetch('https://httpbin.org/anything', {
-      method: 'POST',
-      body: JSON.stringify(formData)
-    })
-    .then(function(response) {
-      formData.router.push('/dashboard');
-    }).catch(function(err) {
-      console.log(err);
-    })
-  }
-
-  render() {
-    return (
-      <div className="App">
-      <h2> Welcome </h2>
-      <LoginForm onChange={this.handleChange} onSubmit={this.handleSubmit} />
+const App = () => (
+  <div>
+    <Router>
+      <div>
+        <TopMenu />
+        {routes}
       </div>
-    );
-  }
-}
+    </Router>
+  </div>
+)
 
 export default App;
