@@ -9,10 +9,8 @@ const authorizationDefaultState = {
 const authorization = (state = authorizationDefaultState, action) => {
   switch (action.type) {
     case Types.LOGIN:
-      console.log('reducer login :)');
       return Object.assign({}, state, { loggedIn: true });
     default:
-      console.log('reducer not login :(', action);
       return state;
   }
 }
