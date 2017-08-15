@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 import { login } from '../actions';
 
+import TopMenu from '../components/TopMenu'
 import Dashboard from '../components/Dashboard';
 import Performance from '../components/Performance';
 import Preferences from '../components/Preferences';
@@ -14,16 +15,17 @@ class Authenticated extends React.Component {
     this.state = { loggedIn: false };
   }
 
-  componentDidMount () {
-    console.log(this.props.loggedIn);
-  }
-
   render() {
-    return <div>
-      <Route exact path="/" component={Dashboard}/>
-      <Route path="/performance" component={Performance}/>
-      <Route path="/preferences" component={Preferences}/>
-    </div>;
+    if (!this.props.loggedIn) {
+      return <Redirect to="/sign-in" />
+    } else {
+      return <div>
+        <TopMenu />
+        <Route exact path="/" component={Dashboard}/>
+        <Route path="/performance" component={Performance}/>
+        <Route path="/preferences" component={Preferences}/>
+      </div>;
+    }
   }
 }
 

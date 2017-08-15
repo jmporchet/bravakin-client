@@ -5,13 +5,10 @@ import {
 
 import routes from './config/routes';
 
-import TopMenu from './components/TopMenu'
-
 const App = () => (
   <div>
     <Router>
       <div>
-        <TopMenu />
         {routes}
       </div>
     </Router>
