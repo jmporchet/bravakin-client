@@ -18,6 +18,27 @@ class Preferences extends React.Component {
     console.log('formdata', formData);
     const { User } = formData;
     this.props.addPeople('@' + User);
+
+    var body = {
+      'update': {
+    'be_like': [
+      User
+    ]
+  },
+  'add': {
+    'like_tags': [
+    ]
+  }
+};
+
+    fetch("http://private-cb530a-bravakin.apiary-mock.com/user", {
+      method: "PUT",
+      headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ACCESS_TOKEN'
+              },
+      body: JSON.stringify(body)
+    });
   }
 
   render() {

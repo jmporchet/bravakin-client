@@ -14,3 +14,9 @@ export const addPeople = (people) => ({
   type: Types.ADD_PEOPLE,
   people
 });
+
+export const fetchUserData = (userData) => {
+    return fetch('https://private-cb530a-bravakin.apiary-mock.com/user')
+      .then(response => response.json())
+      .then(json => json)
+}

@@ -16,6 +16,27 @@ class Preferences extends React.Component {
   handleSubmit = (formData) => {
     const { hashtags } = formData;
     this.props.addHashtag('#' + hashtags);
+
+    var body = {
+      'update': {
+    'be_like': [
+    ]
+  },
+  'add': {
+    'like_tags': [
+      hashtags
+    ]
+  }
+};
+
+    fetch("http://private-cb530a-bravakin.apiary-mock.com/user", {
+      method: "PUT",
+      headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ACCESS_TOKEN'
+              },
+      body: JSON.stringify(body)
+    });
   }
 
   render() {

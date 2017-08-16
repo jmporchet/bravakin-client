@@ -5,3 +5,5 @@ export const LOGIN = 'LOGIN';
 export const ADD_HASHTAG = 'ADD_HASHTAG';
 
 export const ADD_PEOPLE = 'ADD_PEOPLE';
+
+export const FETCH_USER_DATA = 'FETCH_USER_DATA';
