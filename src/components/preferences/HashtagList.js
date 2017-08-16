@@ -9,10 +9,6 @@ import HashtagForm from './HashtagForm'
 
 class Preferences extends React.Component {
 
-  componentWillMount() {
-    setTimeout(() => this.props.addHashtag('#postureo', '#nature'), 2000);
-  }
-
   renderHashtags () {
     return this.props.hashtags.map((el, index) => <li key={index}>{el}</li>)
   };
