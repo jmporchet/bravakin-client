@@ -16,8 +16,10 @@ const authorization = (state = authorizationDefaultState, action) => {
 };
 
 const userProfileDefaultState = {
-
-};
+  username: '',
+  hashtags: ['#blockchain', '#hardfork', '#nature', '#goodmorning'],
+  interesting_people: []
+}
 
 const userProfile = (state = userProfileDefaultState, action) => {
   switch (action.type) {
@@ -36,31 +38,23 @@ const userProfile = (state = userProfileDefaultState, action) => {
   }
 };
 
+
+const listHashtags = (state = userProfileDefaultState, action) => {
+  console.log(state)
+  switch (action.type) {
+    case Types.HASHTAG:
+    return Object.assign({}, state, {hashtags: ['#nature']});
+    default:
+    console.log('state2', state);
+      return state;
+  }
+}
+
 const reducer = combineReducers({
   authorization,
   userProfile,
+  listHashtags,
   form: reduxFormReducer
 });
-
-const listHashtags = (state = [], action) => {
-
-}
-
-const testAddHashtag = () => {
-  const stateBefore = [];
-  const action = {
-    type: 'ADD_HASHTAG',
-    id: 0,
-    text: '#blockchain'
-  };
-
-  const stateAfter = [
-    {
-      id: 0,
-      text: '#blockchain',
-      completed: false
-    };
-  ];
-}
 
 export default reducer;

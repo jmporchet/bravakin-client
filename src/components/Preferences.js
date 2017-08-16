@@ -1,41 +1,35 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
+import { hashtag } from '../actions';
 
 import { ListGroup, ListGroupItem, Badge } from 'reactstrap';
 
-export default class Preferences extends React.Component {
+class Preferences extends React.Component {
+
+  renderHashtags () {
+    return this.props.hashtags.map((el) => <li>{el}</li>)
+  };
+
   render() {
     return (
       <div>
-        <div className="row">
-          <div className="col">
-          </div>
-          <div className="col">
-            Profile information
-          </div>
-          <div className="col">
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            Interesting users
-            <ListGroup>
-              <ListGroupItem className="justify-content-between">Cras justo odio <i className="fa fa-times" aria-hidden="true"></i></ListGroupItem>
-              <ListGroupItem className="justify-content-between">Dapibus ac facilisis in <i className="fa fa-times" aria-hidden="true"></i></ListGroupItem>
-              <ListGroupItem className="justify-content-between">Morbi leo risus <i className="fa fa-times" aria-hidden="true"></i></ListGroupItem>
-            </ListGroup>
-          </div>
-          <div className="col">
-          </div>
-          <div className="col">
-            Interesting hashtags
-            <ListGroup>
-              <ListGroupItem className="justify-content-between">Cras justo odio <i className="fa fa-times" aria-hidden="true"></i></ListGroupItem>
-              <ListGroupItem className="justify-content-between">Dapibus ac facilisis in <i className="fa fa-times" aria-hidden="true"></i></ListGroupItem>
-              <ListGroupItem className="justify-content-between">Morbi leo risus <i className="fa fa-times" aria-hidden="true"></i></ListGroupItem>
-            </ListGroup>
-          </div>
-        </div>
+        <h2>List of Hashtags</h2>
+        <ul>
+          {this.renderHashtags()}
+        </ul>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  hashtags: state.listHashtags.hashtags
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  hashtag: () => dispatch(hashtag())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Preferences)
