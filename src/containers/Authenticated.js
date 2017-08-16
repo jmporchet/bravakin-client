@@ -30,7 +30,7 @@ class Authenticated extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  loggedIn: state.authorization.loggedIn,
+  loggedIn: state.authorization.loggedIn
 });
 
 const mapDispatchToProps = (dispatch) => ({
