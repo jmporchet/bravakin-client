@@ -5,7 +5,7 @@ export const saveInstagramToken = (access_token) => ({
   access_token
 });
 
-export const hashtag = () => ({
-  type: Types.HASHTAG,
-  url: '/preferences',
+export const addHashtag = (hashtag) => ({
+  type: Types.ADD_HASHTAG,
+  hashtag
 });

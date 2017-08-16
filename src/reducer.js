@@ -42,8 +42,10 @@ const userProfile = (state = userProfileDefaultState, action) => {
 const listHashtags = (state = userProfileDefaultState, action) => {
   console.log(state)
   switch (action.type) {
-    case Types.HASHTAG:
-    return Object.assign({}, state, {hashtags: ['#nature']});
+    case Types.ADD_HASHTAG:
+    return Object.assign({}, state, {
+      hashtags: state.hashtags.concat(action.hashtag)
+    });
     default:
     console.log('state2', state);
       return state;
