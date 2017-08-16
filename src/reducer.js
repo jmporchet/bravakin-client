@@ -42,4 +42,25 @@ const reducer = combineReducers({
   form: reduxFormReducer
 });
 
+const listHashtags = (state = [], action) => {
+
+}
+
+const testAddHashtag = () => {
+  const stateBefore = [];
+  const action = {
+    type: 'ADD_HASHTAG',
+    id: 0,
+    text: '#blockchain'
+  };
+
+  const stateAfter = [
+    {
+      id: 0,
+      text: '#blockchain',
+      completed: false
+    };
+  ];
+}
+
 export default reducer;
