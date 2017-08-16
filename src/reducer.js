@@ -17,8 +17,8 @@ const authorization = (state = authorizationDefaultState, action) => {
 
 const userProfileDefaultState = {
   username: '',
-  hashtags: ['#blockchain', '#hardfork', '#nature', '#goodmorning'],
-  interesting_people: ['@aroldus']
+  hashtags: [],
+  interesting_people: []
 }
 
 const userProfile = (state = userProfileDefaultState, action) => {
