@@ -15,21 +15,11 @@ const authorization = (state = authorizationDefaultState, action) => {
   }
 };
 
+
 const userProfileDefaultState = {
   username: '',
   hashtags: [],
   interesting_people: []
-}
-
-const defaultState = (state = userProfileDefaultState, action) => {
-  switch (action.type) {
-    case Types.FETCH_USER_DATA:
-      return Object.assign({}, state, {
-
-      })
-      default:
-        return state;
-  }
 }
 
 const userProfile = (state = userProfileDefaultState, action) => {

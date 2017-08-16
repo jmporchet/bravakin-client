@@ -13,18 +13,27 @@ class Authenticated extends React.Component {
     this.state = { access_token: null };
   }
 
+  componentWillMount() {
+    const URL = "https://private-cb530a-bravakin.apiary-mock.com/user";
+    return fetch(URL, { method: 'GET'})
+       .then((response) => response.json)
+       .then((json) => console.log('...........', json))
+  }
+
   render () {
     if (!this.props.access_token) {
       return <Redirect to="/sign-in" />;
     } else {
-      return <div>
-        <TopMenu />
-        <Switch>
-          <Route exact path="/" component={Dashboard}/>
-          <Route path="/performance" component={Performance}/>
-          <Route path="/preferences" component={Preferences}/>
-        </Switch>
-      </div>;
+      return (
+        <div>
+          <TopMenu />
+          <Switch>
+            <Route exact path="/" component={Dashboard}/>
+            <Route path="/performance" component={Performance}/>
+            <Route path="/preferences" component={Preferences}/>
+          </Switch>
+        </div>;
+      )
     }
   }
 }

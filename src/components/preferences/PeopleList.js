@@ -16,13 +16,13 @@ class Preferences extends React.Component {
 
   handleSubmit = (formData) => {
     console.log('formdata', formData);
-    const { User } = formData;
-    this.props.addPeople('@' + User);
+    const { user } = formData;
+    this.props.addPeople('@' + user);
 
     var body = {
       'update': {
     'be_like': [
-      User
+      user
     ]
   },
   'add': {
@@ -31,7 +31,7 @@ class Preferences extends React.Component {
   }
 };
 
-    fetch("http://private-cb530a-bravakin.apiary-mock.com/user", {
+    fetch("https://private-cb530a-bravakin.apiary-mock.com/me", {
       method: "PUT",
       headers: {
                 'Content-Type': 'application/json',

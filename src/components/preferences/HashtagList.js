@@ -29,7 +29,7 @@ class Preferences extends React.Component {
   }
 };
 
-    fetch("http://private-cb530a-bravakin.apiary-mock.com/user", {
+    fetch("https://private-cb530a-bravakin.apiary-mock.com/me", {
       method: "PUT",
       headers: {
                 'Content-Type': 'application/json',
