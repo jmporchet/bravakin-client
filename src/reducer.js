@@ -20,7 +20,12 @@ const userProfileDefaultState = {
 }
 
 const userProfile = (state = userProfileDefaultState, action) => {
-  return state;
+  switch (action.type) {
+    case Types.GET_INSTAGRAM_DATA:
+      return Object.assign({}, state, { username: action.username});
+    default:
+      return state;
+  }
 }
 
 const reducer = combineReducers({

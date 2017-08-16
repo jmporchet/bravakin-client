@@ -6,3 +6,9 @@ export const login = (username, password) => ({
   username,
   password
 });
+
+export const loginWithInstagram = (userInfo) => ({
+  type: Types.GET_INSTAGRAM_DATA,
+  url: '/dashboard',
+  userInfo
+})
