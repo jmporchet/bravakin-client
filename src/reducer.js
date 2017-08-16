@@ -18,7 +18,7 @@ const authorization = (state = authorizationDefaultState, action) => {
 const userProfileDefaultState = {
   username: '',
   hashtags: ['#blockchain', '#hardfork', '#nature', '#goodmorning'],
-  interesting_people: []
+  interesting_people: ['@aroldus']
 }
 
 const userProfile = (state = userProfileDefaultState, action) => {
@@ -46,6 +46,10 @@ const listHashtags = (state = userProfileDefaultState, action) => {
     return Object.assign({}, state, {
       hashtags: state.hashtags.concat(action.hashtag)
     });
+    case Types.ADD_PEOPLE:
+    return Object.assign({}, state, {
+      interesting_people: state.interesting_people.concat(action.people)
+    })
     default:
     console.log('state2', state);
       return state;

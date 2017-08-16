@@ -9,3 +9,8 @@ export const addHashtag = (hashtag) => ({
   type: Types.ADD_HASHTAG,
   hashtag
 });
+
+export const addPeople = (people) => ({
+  type: Types.ADD_PEOPLE,
+  people
+});

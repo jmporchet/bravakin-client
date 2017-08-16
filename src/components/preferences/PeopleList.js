@@ -2,33 +2,31 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { addHashtag } from '../../actions';
+import { addPeople } from '../../actions';
 import { ListGroup, ListGroupItem, Badge } from 'reactstrap';
 
-import HashtagForm from './HashtagForm'
+import PeopleForm from './PeopleForm'
 
 class Preferences extends React.Component {
 
-  componentWillMount() {
-    setTimeout(() => this.props.addHashtag('#postureo', '#nature'), 2000);
-  }
 
-  renderHashtags () {
-    return this.props.hashtags.map((el, index) => <li key={index}>{el}</li>)
+  renderinteresting_people () {
+    return this.props.interesting_people.map((el, index) => <li key={index}>{el}</li>)
   };
 
   handleSubmit = (formData) => {
-    const { hashtags } = formData;
-    this.props.addHashtag('#' + hashtags);
+    console.log('formdata', formData);
+    const { User } = formData;
+    this.props.addPeople('@' + User);
   }
 
   render() {
     return (
       <div>
         <ul>
-          {this.renderHashtags()}
+        {this.renderinteresting_people()}
         </ul>
-        <HashtagForm onSubmit={this.handleSubmit} />
+        <PeopleForm onSubmit={this.handleSubmit} />
       </div>
 
     );
@@ -36,12 +34,11 @@ class Preferences extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  hashtags: state.listHashtags.hashtags,
   interesting_people: state.listHashtags.interesting_people
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  addHashtag: (hashtag) => dispatch(addHashtag(hashtag))
+  addPeople: (people) => dispatch(addPeople(people))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Preferences)
