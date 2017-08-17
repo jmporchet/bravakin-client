@@ -17,7 +17,7 @@ class Authenticated extends React.Component {
     const URL = "https://private-cb530a-bravakin.apiary-mock.com/user";
     return fetch(URL, { method: 'GET'})
        .then((response) => response.json)
-       .then((json) => console.log('...........', json))
+       .then((json) => console.log(json))
   }
 
   render () {
