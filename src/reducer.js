@@ -16,12 +16,6 @@ const authorization = (state = authorizationDefaultState, action) => {
 };
 
 
-const userProfileDefaultState = {
-  username: '',
-  hashtags: [],
-  interesting_people: []
-}
-
 const userProfile = (state = userProfileDefaultState, action) => {
   switch (action.type) {
     // case Types.SAVE_INSTAGRAM_TOKEN:
@@ -40,7 +34,11 @@ const userProfile = (state = userProfileDefaultState, action) => {
 };
 
 // This needs to be inside userProfile
-const listHashtags = (state = userProfileDefaultState, action) => {
+const userProfileDefaultState = (state = {
+  username: '',
+  hashtags: [],
+  interesting_people: []
+}, action) => {
   console.log(state)
   switch (action.type) {
     case Types.ADD_HASHTAG:
@@ -60,7 +58,7 @@ const listHashtags = (state = userProfileDefaultState, action) => {
 const reducer = combineReducers({
   authorization,
   userProfile,
-  listHashtags,
+  userProfileDefaultState,
   form: reduxFormReducer
 });
 

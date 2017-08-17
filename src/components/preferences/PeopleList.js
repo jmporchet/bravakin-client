@@ -55,7 +55,7 @@ class Preferences extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  interesting_people: state.listHashtags.interesting_people
+  interesting_people: state.userProfileDefaultState.interesting_people
 })
 
 const mapDispatchToProps = (dispatch) => ({
