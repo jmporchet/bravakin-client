@@ -6,4 +6,6 @@ export const ADD_HASHTAG = 'ADD_HASHTAG';
 
 export const ADD_PEOPLE = 'ADD_PEOPLE';
 
+export const ADD_USER = 'ADD_USER';
+
 export const FETCH_USER_DATA = 'FETCH_USER_DATA';

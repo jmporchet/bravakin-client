@@ -9,7 +9,6 @@ import UserInfo from './preferences/UserInfo'
 
 
 import { login } from '../actions';
-import { addHashtag } from '../actions';
 
 import { ListGroup, ListGroupItem, Badge } from 'reactstrap';
 

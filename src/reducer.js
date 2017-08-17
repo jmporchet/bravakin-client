@@ -8,8 +8,11 @@ const authorizationDefaultState = {
 
 const authorization = (state = authorizationDefaultState, action) => {
   switch (action.type) {
+
     case Types.SAVE_INSTAGRAM_TOKEN:
       return Object.assign({}, state, { access_token: action.access_token });
+    case Types.LOGIN:
+      return Object.assign({}, state, { loggedIn: true });
     default:
       return state;
   }
@@ -35,9 +38,9 @@ const userProfile = (state = userProfileDefaultState, action) => {
 
 // This needs to be inside userProfile
 const userProfileDefaultState = (state = {
-  username: '',
+  username: ['@sicarette'],
   hashtags: [],
-  interesting_people: []
+  interesting_people: ['@larus']
 }, action) => {
   console.log(state)
   switch (action.type) {
@@ -48,16 +51,19 @@ const userProfileDefaultState = (state = {
     case Types.ADD_PEOPLE:
     return Object.assign({}, state, {
       interesting_people: state.interesting_people.concat(action.people)
-    })
+    });
+    case Types.ADD_USER:
+    return Object.assign({}, state, {
+      username: state.username.concat(action.user)
+    });
     default:
     console.log('state2', state);
-      return state;
+    return state;
   }
 }
 
 const reducer = combineReducers({
   authorization,
-  userProfile,
   userProfileDefaultState,
   form: reduxFormReducer
 });
