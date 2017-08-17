@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
-import TopMenu from '../components/TopMenu';
+import { login, addUser } from '../actions';
+
+import TopMenu from '../components/TopMenu'
 import Dashboard from '../components/Dashboard';
 import Performance from '../components/Performance';
 import Preferences from '../components/Preferences';
@@ -14,10 +16,14 @@ class Authenticated extends React.Component {
   }
 
   componentWillMount() {
-    const URL = "https://private-cb530a-bravakin.apiary-mock.com/user";
-    return fetch(URL, { method: 'GET'})
-       .then((response) => response.json)
-       .then((json) => console.log(json))
+    fetch('https://private-cb530a-bravakin.apiary-mock.com/me')
+    .then((response) => response.json())
+    .then((response) => {
+      this.props.addUser(response.data.username);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
   render () {
@@ -39,10 +45,12 @@ class Authenticated extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  access_token: state.authorization.access_token
+  username: state.userProfileDefaultState.username
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  login: () => dispatch(login()),
+  addUser: (user) => dispatch(addUser(user))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Authenticated);

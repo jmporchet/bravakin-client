@@ -16,13 +16,13 @@ class Preferences extends React.Component {
 
   handleSubmit = (formData) => {
     console.log('formdata', formData);
-    const { user } = formData;
-    this.props.addPeople('@' + user);
+    const { User } = formData;
+    this.props.addPeople('@' + User);
 
     var body = {
       'update': {
     'be_like': [
-      user
+      User
     ]
   },
   'add': {

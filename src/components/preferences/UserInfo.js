@@ -4,21 +4,6 @@ import { addUser } from '../../actions';
 
 
 class UserInfo extends React.Component {
-
-
-  componentWillMount() {
-    function data() {
-      fetch('https://private-cb530a-bravakin.apiary-mock.com/me')
-      .then((response) => response.json())
-      .then((response) => {
-        this.props.addUser(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    }
-  }
-
 // Trying to get data from fetch ?using props?
   render() {
     return(

@@ -38,19 +38,19 @@ const userProfile = (state = userProfileDefaultState, action) => {
 
 // This needs to be inside userProfile
 const userProfileDefaultState = (state = {
-  username: ['@sicarette'],
+  username: '',
   hashtags: [],
-  interesting_people: ['@larus']
+  interesting_people: []
 }, action) => {
   console.log(state)
   switch (action.type) {
-    case Types.ADD_HASHTAG:
-    return Object.assign({}, state, {
-      hashtags: state.hashtags.concat(action.hashtag)
-    });
     case Types.ADD_PEOPLE:
     return Object.assign({}, state, {
       interesting_people: state.interesting_people.concat(action.people)
+    });
+    case Types.ADD_HASHTAG:
+    return Object.assign({}, state, {
+      hashtags: state.hashtags.concat(action.hashtag)
     });
     case Types.ADD_USER:
     return Object.assign({}, state, {
