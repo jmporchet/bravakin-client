@@ -39,7 +39,7 @@ const userProfile = (state = userProfileDefaultState, action) => {
   }
 };
 
-
+// This needs to be inside userProfile
 const listHashtags = (state = userProfileDefaultState, action) => {
   console.log(state)
   switch (action.type) {
