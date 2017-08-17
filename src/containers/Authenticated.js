@@ -4,7 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 import { login } from '../actions';
 
-import TopMenu from '../components/TopMenu'
+import TopMenu from '../components/TopMenu';
 import Dashboard from '../components/Dashboard';
 import Performance from '../components/Performance';
 import Preferences from '../components/Preferences';
@@ -15,9 +15,9 @@ class Authenticated extends React.Component {
     this.state = { loggedIn: false };
   }
 
-  render() {
+  render () {
     if (!this.props.loggedIn) {
-      return <Redirect to="/sign-in" />
+      return <Redirect to="/sign-in" />;
     } else {
       return <div>
         <TopMenu />

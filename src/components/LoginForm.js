@@ -2,10 +2,10 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 const LoginForm = props => {
-    const { handleSubmit } = props;
-    return(
-      <form onSubmit={handleSubmit}>
-        <div>
+  const { handleSubmit } = props;
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
         <label> Username </label>
         <div>
           <Field
@@ -13,10 +13,10 @@ const LoginForm = props => {
             component="input"
             type="text"
             placeholder="username"
-            />
-          </div>
+          />
         </div>
-        <div>
+      </div>
+      <div>
         <label> Password </label>
         <div>
           <Field
@@ -24,15 +24,15 @@ const LoginForm = props => {
             component="input"
             type="password"
             placeholder="password"
-            />
-          </div>
+          />
         </div>
-        <br/>
-        <button type="submit">Submit</button>
-      </form>
-    );
-  };
+      </div>
+      <br/>
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
 
-  export default reduxForm({
-    form: 'simple',
-  })(LoginForm);
+export default reduxForm({
+  form: 'simple',
+})(LoginForm);

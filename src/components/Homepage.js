@@ -25,16 +25,15 @@ class Homepage extends React.Component {
     // new/returning users to redirect the user to the /dashboard
     this.props.login('','');
 
-    console.log('Could login with Instagram', response);
   }
 
   responseInstagramNotOK = (error) => {
-    console.log('Couldn\'t verify your credentials', error);
+    //handle error
   }
 
-  render() {
+  render () {
     if (this.props.loggedIn) {
-      return <Redirect to="/preferences" />
+      return <Redirect to="/preferences" />;
     } else {
       return (
         <div>
@@ -50,17 +49,17 @@ class Homepage extends React.Component {
             <span> Login with Instagram</span>
           </InstagramLogin>
         </div>
-      )
+      );
     }
   }
 }
 
 const mapStateToProps = (state) => ({
   loggedIn: state.authorization.loggedIn
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
   login: (username, password) => dispatch(login(username, password))
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Homepage)
+export default connect(mapStateToProps, mapDispatchToProps)(Homepage);
