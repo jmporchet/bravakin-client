@@ -1,5 +1,5 @@
 ### App secrets ###
-private/
+src/private/conf.js
 
 ### Node ###
 
