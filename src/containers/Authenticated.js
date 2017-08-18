@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 
 import { login } from '../actions';
 
@@ -21,9 +21,11 @@ class Authenticated extends React.Component {
     } else {
       return <div>
         <TopMenu />
-        <Route exact path="/" component={Dashboard}/>
-        <Route path="/performance" component={Performance}/>
-        <Route path="/preferences" component={Preferences}/>
+        <Switch>
+          <Route exact path="/" component={Dashboard}/>
+          <Route path="/performance" component={Performance}/>
+          <Route path="/preferences" component={Preferences}/>
+        </Switch>
       </div>;
     }
   }

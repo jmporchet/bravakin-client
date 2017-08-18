@@ -4,31 +4,26 @@ import { Redirect } from 'react-router-dom';
 import InstagramLogin from 'react-instagram-login';
 import { login } from '../actions';
 
-import LoginForm from './LoginForm';
-
 import conf from '../private/conf';
 import FontAwesome from 'react-fontawesome';
 
 class Homepage extends React.Component {
 
-  handleSubmit = (formData) => {
-    const {username, password} = formData;
-    this.props.login(username, password);
-  }
-
-  responseInstagramOK = (response) => {
+  responseOK = (response) => {
     // response will be a user Object provided by bravakin-server
     // Save it into the state
-    this.props.getInstagramData(response);
 
-    // sets this.props.loggedIn, will need to be refactored to account for
-    // new/returning users to redirect the user to the /dashboard
-    this.props.login('','');
+    // Account for new/returning users to redirect the user to /dashboard
 
   }
 
-  responseInstagramNotOK = (error) => {
-    //handle error
+  responseNotOK = (error) => {
+
+  }
+
+  loginClick = () => {
+    // temporary solution to get the token without redirecting to bravakin-server
+    window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=${conf.INSTAGRAM_CLIENT_ID}&redirect_uri=${conf.OAUTH_CB_URL}&response_type=token`
   }
 
   render () {
@@ -38,16 +33,18 @@ class Homepage extends React.Component {
       return (
         <div>
           <h1>Sign in</h1>
-          <LoginForm onSubmit={this.handleSubmit} />
           <hr />
-          <InstagramLogin
+          {/* <InstagramLogin
             clientId={conf.INSTAGRAM_CLIENT_ID}
-            onSuccess={this.responseInstagramOK}
-            onFailure={this.responseInstagramNotOK}
-          >
+            onSuccess={responseOK}
+            onFailure={this.responseNotOK}
+            redirectUri={conf.OAUTH_CB_URL}
+          > */}
+          <button onClick={this.loginClick} >
             <FontAwesome name="instagram" />
             <span> Login with Instagram</span>
-          </InstagramLogin>
+          </button>
+          {/* </InstagramLogin> */}
         </div>
       );
     }
