@@ -20,9 +20,17 @@ class Card2 extends Component {
 
   }
 
+  handleSubmit = (formData) => {
+    const {username, password} = formData;
+    this.props.login(username, password);
+  }
+
  fakeData = () => {
   console.log('FakeData: ', FakeData);
-  // FakeData.map((data) => <div className="card " ref="{data.id}" style={{backgroundImage: `url(${data.image})`, backgroundSize: 'cover', backgroundPosition: 'center'}}></div>)
+  let ref = 0;
+  return FakeData.map((data) =>
+  <div className="card" ref={data.id}
+    style={{backgroundImage: "url(" + data.image + ")", backgroundSize: 'cover', backgroundPosition: 'center'}}></div>)
 }
 
   componentWillMount() {
@@ -68,7 +76,7 @@ class Card2 extends Component {
               {/*
                 children elements is will be Card
                 */}
-                // {this.fakeData()}
+                {this.fakeData()}
               </Swing>
             </div>
             <div className="control">
