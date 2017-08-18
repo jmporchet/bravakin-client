@@ -1,2 +1,2 @@
 export const LOGIN = 'LOGIN';
-export const GET_INSTAGRAM_DATA = 'GET_INSTAGRAM_DATA';
+export const SAVE_INSTAGRAM_TOKEN = 'SAVE_INSTAGRAM_TOKEN';

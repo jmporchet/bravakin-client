@@ -7,8 +7,8 @@ export const login = (username, password) => ({
   password
 });
 
-export const loginWithInstagram = (userInfo) => ({
-  type: Types.GET_INSTAGRAM_DATA,
+export const saveInstagramToken = (access_token) => ({
+  type: Types.SAVE_INSTAGRAM_TOKEN,
   url: '/dashboard',
-  userInfo
+  access_token
 });
