@@ -6,7 +6,7 @@ describe('authorization reducer', () => {
   it('should return the initial state', () => {
     expect(
       reducers(undefined, {})
-    ).toEqual({'authorization': {'loggedIn': false}, 'form': {}, 'userProfile': {}});
+    ).toEqual({'authorization': {'loggedIn': false, 'access_token': null}, 'form': {}, 'userProfile': {}});
   });
 
   it('should handle LOGIN', () => {
@@ -14,25 +14,25 @@ describe('authorization reducer', () => {
       reducers({ }, {
         type: 'LOGIN'
       })
-    ).toEqual({'authorization': {'loggedIn': true}, 'form': {}, 'userProfile': {}});
+    ).toEqual({'authorization': {'loggedIn': true, 'access_token': null}, 'form': {}, 'userProfile': {}});
   });
 
-  it('should handle GET_INSTAGRAM_DATA', () => {
+  it('should handle SAVE_INSTAGRAM_TOKEN', () => {
     expect(
       reducers({ }, {
-        type: 'GET_INSTAGRAM_DATA',
-        username: 'frank'
+        type: 'SAVE_INSTAGRAM_TOKEN',
+        access_token: '5885499160.38553e7.ccfd98b2185a4fed833163bf17e86b04'
       })
-    ).toEqual({'authorization': {'loggedIn': false}, 'form': {}, 'userProfile': {username: 'frank'}});
+    ).toEqual({'authorization': {'loggedIn': false, 'access_token': '5885499160.38553e7.ccfd98b2185a4fed833163bf17e86b04'}, 'form': {}, 'userProfile': {}});
   });
 
   it('should compose the correct state', () => {
     expect(
       reducers({'authorization': {'loggedIn': true}, 'form': {}, 'userProfile': {}}, {
-        type: 'GET_INSTAGRAM_DATA',
-        username: 'frank'
+        type: 'SAVE_INSTAGRAM_TOKEN',
+        access_token: '5885499160.38553e7.ccfd98b2185a4fed833163bf17e86b04'
       })
-    ).toEqual({'authorization': {'loggedIn': true}, 'form': {}, 'userProfile': { username: 'frank'} });
+    ).toEqual({'authorization': {'loggedIn': true, 'access_token': '5885499160.38553e7.ccfd98b2185a4fed833163bf17e86b04'}, 'form': {}, 'userProfile': {} });
   });
 
 });
