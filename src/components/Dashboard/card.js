@@ -5,9 +5,9 @@ import Photo from './photo.jpg'
 import Swing, { Stack, Card, Direction } from './swing.js';
 import axios from 'axios';
 import faker from 'faker';
+import FakeData from './fakeData.js';
 
 class Card2 extends Component {
-
 
 
   constructor(props, context) {
@@ -20,6 +20,10 @@ class Card2 extends Component {
 
   }
 
+ fakeData = () => {
+  console.log('FakeData: ', FakeData);
+  // FakeData.map((data) => <div className="card " ref="{data.id}" style={{backgroundImage: `url(${data.image})`, backgroundSize: 'cover', backgroundPosition: 'center'}}></div>)
+}
 
   componentWillMount() {
     this.state = { images: [] };
@@ -46,12 +50,6 @@ class Card2 extends Component {
     card.throwOut(100, 200, Swing.DIRECTION.RIGHT);
   }
 
-  newCard = () => {
-    for (let i = 0; i < 20; i++) {
-      <div className="card " ref="{i}" style={{backgroundImage: `url(${faker.image.image()})`, backgroundSize: 'cover', backgroundPosition: 'center'}}></div>
-    }
-  }
-
   render() {
     return (
       <div>
@@ -70,7 +68,7 @@ class Card2 extends Component {
               {/*
                 children elements is will be Card
                 */}
-                {newCard()}
+                // {this.fakeData()}
               </Swing>
             </div>
             <div className="control">
