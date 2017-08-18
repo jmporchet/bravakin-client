@@ -7,7 +7,7 @@ import { ListGroup, ListGroupItem, Badge } from 'reactstrap';
 
 import PeopleForm from './PeopleForm'
 
-class Preferences extends React.Component {
+class PeopleList extends React.Component {
 
 
   renderinteresting_people () {
@@ -62,4 +62,4 @@ const mapDispatchToProps = (dispatch) => ({
   addPeople: (people) => dispatch(addPeople(people))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Preferences)
+export default connect(mapStateToProps, mapDispatchToProps)(PeopleList)

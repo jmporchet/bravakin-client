@@ -28,6 +28,6 @@ const UserSettings = props => {
   );
 };
 
-export default reduxForm({
+export default userForm({
   form: 'simple',
 })(UserSettings);

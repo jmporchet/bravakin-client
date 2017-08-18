@@ -7,7 +7,7 @@ import { ListGroup, ListGroupItem, Badge } from 'reactstrap';
 
 import HashtagForm from './HashtagForm'
 
-class Preferences extends React.Component {
+class HashtagList extends React.Component {
 
   renderHashtags () {
     return this.props.hashtags.map((el, index) => <li key={index}>{el}</li>)
@@ -19,15 +19,14 @@ class Preferences extends React.Component {
 
     var body = {
       'update': {
-    'be_like': [
-    ]
-  },
-  'add': {
-    'like_tags': [
-      hashtags
-    ]
-  }
-};
+    'be_like': []
+      },
+      'add': {
+        'like_tags': [
+          hashtags
+        ]
+      }
+    };
 
     fetch("https://private-cb530a-bravakin.apiary-mock.com/me", {
       method: "PUT",
@@ -61,4 +60,4 @@ const mapDispatchToProps = (dispatch) => ({
   addHashtag: (hashtag) => dispatch(addHashtag(hashtag))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Preferences)
+export default connect(mapStateToProps, mapDispatchToProps)(HashtagList)

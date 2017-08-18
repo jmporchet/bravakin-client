@@ -26,10 +26,10 @@ class Preferences extends React.Component {
         <UserInfo />
         <UserSettings onSubmit={this.handleSubmit} />
         <h2>List of Hashtags</h2>
-        <HashtagList></HashtagList>
-        <br></br>
+        <HashtagList />
+        <br />
         <h2>List of People</h2>
-        <PeopleList></PeopleList>
+        <PeopleList />
       </div>
     );
   }
