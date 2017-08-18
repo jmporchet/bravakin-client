@@ -9,7 +9,6 @@ class UserInfo extends React.Component {
     return(
       <div>
         <h1>{this.props.username}</h1>
-        <img src='http://i2.cdn.cnn.com/cnnnext/dam/assets/161201115958-68-year-in-pictures-2016-restricted-super-169.jpg'/>
       </div>
     );
   }

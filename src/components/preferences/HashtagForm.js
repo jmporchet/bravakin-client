@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { Button } from 'reactstrap';
 
 const HashtagForm = props => {
     const { handleSubmit } = props;
@@ -17,7 +18,7 @@ const HashtagForm = props => {
           </div>
         </div>
         <br/>
-        <button type="submit">Submit</button>
+        <Button color="primary" size="lg">Submit</Button>
       </form>
     );
   };

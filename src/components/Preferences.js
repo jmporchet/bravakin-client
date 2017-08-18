@@ -23,8 +23,8 @@ class Preferences extends React.Component {
   render() {
     return (
       <div>
-      <UserSettings onSubmit={this.handleSubmit} />
-      <UserInfo />
+        <UserInfo />
+        <UserSettings onSubmit={this.handleSubmit} />
         <h2>List of Hashtags</h2>
         <HashtagList></HashtagList>
         <br></br>

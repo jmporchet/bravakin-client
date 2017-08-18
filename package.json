@@ -29,6 +29,7 @@
     "react": "^15.6.1",
     "react-addons-css-transition-group": "^15.6.0",
     "react-addons-transition-group": "^15.6.0",
+    "react-bootstrap": "^0.31.2",
     "react-dom": "^15.6.1",
     "react-fontawesome": "^1.6.1",
     "react-instagram-login": "^1.0.1",
@@ -39,7 +40,8 @@
     "react-tap-event-plugin": "^2.0.1",
     "reactstrap": "^4.8.0",
     "redux": "^3.7.2",
-    "redux-form": "^7.0.3"
+    "redux-form": "^7.0.3",
+    "redux-form-material-ui": "^4.2.0"
   },
   "devDependencies": {
     "eslint": "^4.1.1",

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
-import { login, addUser } from '../actions';
+import { login } from '../actions';
 
 import TopMenu from '../components/TopMenu'
 import Dashboard from '../components/Dashboard';
@@ -51,6 +51,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   login: () => dispatch(login()),
   addUser: (user) => dispatch(addUser(user))
+  
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Authenticated);
