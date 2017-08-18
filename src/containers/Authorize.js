@@ -1,14 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
-import { login, saveInstagramToken } from '../actions';
-
-
-
-// {/* Authorize will parse the access token from the query string,
-//   will save it in the store/dispatching the action to the reducer and will
-//   redirect to Dashboard */}
+import { saveInstagramToken } from '../actions';
 
 class Authorize extends React.Component {
   constructor () {
@@ -17,9 +11,10 @@ class Authorize extends React.Component {
   }
 
   componentWillMount () {
-    const access_token = window.location.hash.split('=')[1];
-    this.props.saveInstagramToken(access_token);
-    this.props.login('','');
+    if (window.location.hash && window.location.hash.split('=').length > 1) {
+      const access_token = window.location.hash.split('=')[1];
+      this.props.saveInstagramToken(access_token);
+    }
   }
 
   render () {
@@ -28,7 +23,9 @@ class Authorize extends React.Component {
     } else {
       return (
         <div>
-          <h2>test {this.props.access_token}</h2>
+          <h2>Error</h2>
+          <p>There has been an error with Instagram's authorization.</p>
+          <p>Please <a href="/sign-in">try again</a>.</p>
         </div>
       )
     }
@@ -37,12 +34,10 @@ class Authorize extends React.Component {
 
 const mapStateToProps = (state) => ({
   access_token: state.authorization.access_token,
-  loggedIn: state.authorization.loggedIn,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  saveInstagramToken: (access_token) => dispatch(saveInstagramToken(access_token)),
-  login: (username, password) => dispatch(login(username, password))
+  saveInstagramToken: (access_token) => dispatch(saveInstagramToken(access_token))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Authorize);

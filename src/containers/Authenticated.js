@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
-import { login } from '../actions';
-
 import TopMenu from '../components/TopMenu';
 import Dashboard from '../components/Dashboard';
 import Performance from '../components/Performance';
@@ -12,11 +10,11 @@ import Preferences from '../components/Preferences';
 class Authenticated extends React.Component {
   constructor () {
     super();
-    this.state = { loggedIn: false };
+    this.state = { access_token: null };
   }
 
   render () {
-    if (!this.props.loggedIn) {
+    if (!this.props.access_token) {
       return <Redirect to="/sign-in" />;
     } else {
       return <div>
@@ -32,11 +30,10 @@ class Authenticated extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  loggedIn: state.authorization.loggedIn
+  access_token: state.authorization.access_token
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  login: () => dispatch(login()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Authenticated);
