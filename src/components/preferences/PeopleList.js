@@ -21,22 +21,22 @@ class PeopleList extends React.Component {
 
     var body = {
       'update': {
-    'be_like': [
-      User
-    ]
-  },
-  'add': {
-    'like_tags': [
-    ]
-  }
-};
+        'be_like': [
+          User
+        ]
+      },
+      'add': {
+        'like_tags': [
+        ]
+      }
+    };
 
     fetch("https://private-cb530a-bravakin.apiary-mock.com/me", {
       method: "PUT",
       headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ACCESS_TOKEN'
-              },
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ACCESS_TOKEN'
+      },
       body: JSON.stringify(body)
     });
   }
@@ -45,7 +45,7 @@ class PeopleList extends React.Component {
     return (
       <div>
         <ul>
-        {this.renderinteresting_people()}
+          {this.renderinteresting_people()}
         </ul>
         <PeopleForm onSubmit={this.handleSubmit} />
       </div>

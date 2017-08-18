@@ -19,7 +19,7 @@ class HashtagList extends React.Component {
 
     var body = {
       'update': {
-    'be_like': []
+        'be_like': []
       },
       'add': {
         'like_tags': [
@@ -31,9 +31,9 @@ class HashtagList extends React.Component {
     fetch("https://private-cb530a-bravakin.apiary-mock.com/me", {
       method: "PUT",
       headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ACCESS_TOKEN'
-              },
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ACCESS_TOKEN'
+      },
       body: JSON.stringify(body)
     });
   }

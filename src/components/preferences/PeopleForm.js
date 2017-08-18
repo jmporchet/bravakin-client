@@ -41,5 +41,5 @@ const PeopleForm = props => {
 
 
 export default reduxForm({
-  form: 'simple',
+  form: 'PeopleForm',
 })(PeopleForm);

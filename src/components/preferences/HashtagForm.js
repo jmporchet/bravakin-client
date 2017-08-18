@@ -23,6 +23,6 @@ const HashtagForm = props => {
     );
   };
 
-  export default HashtagForm({
-    form: 'simple',
+  export default reduxForm({
+    form: 'HashtagForm',
   })(HashtagForm);
