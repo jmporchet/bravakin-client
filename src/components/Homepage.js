@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import conf from '../private/conf';
+import conf from '../private/conf-EXAMPLE';
 import FontAwesome from 'react-fontawesome';
 
 class Homepage extends React.Component {

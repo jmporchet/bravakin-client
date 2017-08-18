@@ -8,17 +8,12 @@ import UserSettings from './preferences/UserSettings'
 import UserInfo from './preferences/UserInfo'
 
 
-import { login } from '../actions';
 
 import { ListGroup, ListGroupItem, Badge } from 'reactstrap';
 
 
 class Preferences extends React.Component {
 
-  handleSubmit = (formData) => {
-    const {username, password} = formData;
-    this.props.login(username, password);
-  }
 
   render() {
     return (
@@ -40,7 +35,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (username, password) => dispatch(login(username, password))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Preferences)
