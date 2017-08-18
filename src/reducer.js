@@ -45,15 +45,15 @@ const userProfileDefaultState = (state = {
   console.log(state)
   switch (action.type) {
     case Types.ADD_PEOPLE:
-    return Object.assign({}, state, {
+      return Object.assign({}, state, {
       interesting_people: state.interesting_people.concat(action.people)
     });
     case Types.ADD_HASHTAG:
-    return Object.assign({}, state, {
+      return Object.assign({}, state, {
       hashtags: state.hashtags.concat(action.hashtag)
     });
     case Types.ADD_USER:
-    return Object.assign({}, state, {
+      return Object.assign({}, state, {
       username: state.username.concat(action.user)
     });
     default:
