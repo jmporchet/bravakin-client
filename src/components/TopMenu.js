@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const TopMenu = () => (
   <div>
@@ -13,6 +13,6 @@ const TopMenu = () => (
 
     <hr/>
   </div>
-)
+);
 
 export default TopMenu;

@@ -1,1 +1,1 @@
-export const LOGIN = 'LOGIN';
+export const SAVE_INSTAGRAM_TOKEN = 'SAVE_INSTAGRAM_TOKEN';

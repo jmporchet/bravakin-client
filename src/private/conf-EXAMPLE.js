@@ -1,0 +1,4 @@
+export default {
+  'INSTAGRAM_CLIENT_ID': 'YOUR CLIENT ID KEY',
+  'OAUTH_CB_URL': 'YOUR REDIRECT URL'
+};

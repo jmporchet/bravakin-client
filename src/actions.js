@@ -1,8 +1,6 @@
 import * as Types from './config/types';
 
-export const login = (username, password) => ({
-  type: Types.LOGIN,
-  url: '/dashoard',
-  username,
-  password,
+export const saveInstagramToken = (access_token) => ({
+  type: Types.SAVE_INSTAGRAM_TOKEN,
+  access_token
 });
