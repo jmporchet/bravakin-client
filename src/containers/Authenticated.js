@@ -5,7 +5,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { login } from '../actions';
 
 import TopMenu from '../components/TopMenu'
-import Dashboard from '../components/Dashboard';
+import Dashboard from '../components/Dasshboard';
 import Performance from '../components/Performance';
 import Preferences from '../components/Preferences';
 
