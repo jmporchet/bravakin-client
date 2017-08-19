@@ -68,19 +68,26 @@ class Card2 extends Component {
                 setStack={(stack)=> this.setState({stack:stack})}
                 ref="stack"
                 throwout={(e)=> {
-                  if(e.throwDirection === Direction.LEFT) console.log('Noooooooo')
-                  else console.log('I like it');
+                  if(e.throwDirection === Direction.LEFT) {
+                    console.log('Noooooooo');
+                  }
+                  else {
+                    console.log('I like it');
+                  }
+
                 }}
                 >
-                  {/* children elements is will be Card */}
-                  {this.fakeData()}
-                </Swing>
-              </div>
-              <div className="control">
-              </div>
+                {/* children elements is will be Card */}
+                {this.fakeData()}
+              </Swing>
             </div>
-          )
-        }
+            <div className="control">
+              <button>I don't like it</button>
+              <button>I love it</button>
+            </div>
+          </div>
+        )
       }
+    }
 
-      export default Card2;
+    export default Card2;
