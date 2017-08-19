@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import styles from './card.css';
 import Photo from './photo.jpg'
 import Swing, { Stack, Card, Direction } from './swing.js';
-import axios from 'axios';
 import faker from 'faker';
 import FakeData from './fakeData.js';
 
@@ -25,68 +24,59 @@ class Card2 extends Component {
     this.props.login(username, password);
   }
 
- fakeData = () => {
-  console.log('FakeData: ', FakeData);
-  let ref = 0;
-  return FakeData.map((data) =>
-  <div className="card" ref={data.id}
-    style={{backgroundImage: "url(" + data.image + ")", backgroundSize: 'cover', backgroundPosition: 'center'}}></div>)
+  fakeData = () => {
+    console.log('FakeData: ', FakeData);
+    let ref = 0;
+    return FakeData.map((data) =>
+    <div className="card" ref={data.id}
+      style={{backgroundImage: "url(" + data.image + ")", backgroundSize: 'cover', backgroundPosition: 'center'}}>{data.username}</div>  )
 }
 
-  componentWillMount() {
-    this.state = { images: [] };
-    axios.get('https://api.imgur.com/3/gallery/hot/viral/0')
-    .then(response => this.setState({ images: response.data.data }));
-    console.log(this.state.images);
-  }
 
-  // throwOut Method
-  throwCard() {
-    // Swing Card Directions
-    console.log('Swing.DIRECTION', Swing.DIRECTION);
+// throwOut Method
+throwCard() {
+  // Swing Card Directions
+  console.log('Swing.DIRECTION', Swing.DIRECTION);
 
-    // Swing Component Childrens refs
-    const target = this.refs.stack.refs.card2;
+  // Swing Component Childrens refs
+  const target = this.refs.stack.refs.card2;
 
-    // get Target Dom Element
-    const el = ReactDOM.findDOMNode(target);
+  // get Target Dom Element
+  const el = ReactDOM.findDOMNode(target);
 
-    // stack.getCard
-    const card = this.state.stack.getCard(el);
+  // stack.getCard
+  const card = this.state.stack.getCard(el);
 
-    // throwOut method call
-    card.throwOut(100, 200, Swing.DIRECTION.RIGHT);
-  }
+  // throwOut method call
+  card.throwOut(100, 200, Swing.DIRECTION.RIGHT);
+}
 
-  render() {
-    return (
-      <div>
-        <div id="viewport">
+render() {
+  return (
+    <div>
+      <div id="viewport">
 
-          {/*
-            Swing Element
-            */}
-            <Swing
-              className="stack"
-              tagName="div"
-              setStack={(stack)=> this.setState({stack:stack})}
-              ref="stack"
-              throwout={(e)=>console.log('throwout',e)}
-              >
-              {/*
-                children elements is will be Card
-                */}
-                {this.fakeData()}
-              </Swing>
-            </div>
-            <div className="control">
-              <button type="button" onClick={this.throwCard.bind(this)}>
-                throw Card
-              </button>
-            </div>
+        {/*
+          Swing Element
+          */}
+          <Swing
+            className="stack"
+            tagName="div"
+            setStack={(stack)=> this.setState({stack:stack})}
+            ref="stack"
+            throwout={(e)=>console.log('throwout',e)}
+            >
+            {/*
+              children elements is will be Card
+              */}
+              {this.fakeData()}
+            </Swing>
           </div>
-        )
-      }
+          <div className="control">
+          </div>
+        </div>
+      )
     }
+  }
 
-    export default Card2;
+  export default Card2;
