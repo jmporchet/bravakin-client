@@ -19,25 +19,9 @@ const authorization = (state = authorizationDefaultState, action) => {
 };
 
 
-const userProfile = (state = userProfileDefaultState, action) => {
-  switch (action.type) {
-    // case Types.SAVE_INSTAGRAM_TOKEN:
-    //   return Object.assign({}, state, {
-    //     id: action.data.id,
-    //     username: action.data.username,
-    //     full_name: action.data.full_name,
-    //     profile_picture: action.data.profile_picture,
-    //     access_token: action.data.access_token,
-    //     like_tags: action.data.like_tags,
-    //     be_like: action.data.be_like
-    //   });
-    default:
-      return state;
-  }
-};
 
 // This needs to be inside userProfile
-const userProfileDefaultState = (state = {
+const userProfile = (state = {
   username: '',
   hashtags: [],
   interesting_people: []
@@ -57,14 +41,13 @@ const userProfileDefaultState = (state = {
       username: state.username.concat(action.user)
     });
     default:
-    console.log('state2', state);
     return state;
   }
 }
 
 const reducer = combineReducers({
   authorization,
-  userProfileDefaultState,
+  userProfile,
   form: reduxFormReducer
 });
 

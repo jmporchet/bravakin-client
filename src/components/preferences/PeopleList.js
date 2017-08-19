@@ -15,7 +15,6 @@ class PeopleList extends React.Component {
   };
 
   handleSubmit = (formData) => {
-    console.log('formdata', formData);
     const { User } = formData;
     this.props.addPeople('@' + User);
 
@@ -55,7 +54,7 @@ class PeopleList extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  interesting_people: state.userProfileDefaultState.interesting_people
+  interesting_people: state.userProfile.interesting_people
 })
 
 const mapDispatchToProps = (dispatch) => ({

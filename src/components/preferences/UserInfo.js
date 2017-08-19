@@ -15,7 +15,7 @@ class UserInfo extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  username: state.userProfileDefaultState.username
+  username: state.userProfile.username
 })
 
 const mapDispatchToProps = (dispatch) => ({

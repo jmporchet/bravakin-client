@@ -45,7 +45,8 @@ class Authenticated extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  username: state.userProfileDefaultState.username
+  username: state.userProfile.username,
+  access_token: state.authorization.access_token
 });
 
 const mapDispatchToProps = (dispatch) => ({

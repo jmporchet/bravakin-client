@@ -30,11 +30,5 @@ class Preferences extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  loggedIn: state.authorization.loggedIn
-})
 
-const mapDispatchToProps = (dispatch) => ({
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Preferences)
+export default Preferences;

@@ -52,8 +52,8 @@ class HashtagList extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  hashtags: state.userProfileDefaultState.hashtags,
-  interesting_people: state.userProfileDefaultState.interesting_people
+  hashtags: state.userProfile.hashtags,
+  interesting_people: state.userProfile.interesting_people
 })
 
 const mapDispatchToProps = (dispatch) => ({
