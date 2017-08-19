@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Field, reduxForm, formValueSelector} from 'redux-form';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import React from 'react';
+import {Field, reduxForm} from 'redux-form';
+import { Button,  } from 'reactstrap';
 
 
 const PeopleForm = props => {

@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 import { addHashtag } from '../../actions';
-import { ListGroup, ListGroupItem, Badge } from 'reactstrap';
 
 import HashtagForm from './HashtagForm'
 
