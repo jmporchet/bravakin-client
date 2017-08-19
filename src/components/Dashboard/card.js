@@ -69,10 +69,10 @@ class Card2 extends Component {
                 ref="stack"
                 throwout={(e)=> {
                   if(e.throwDirection === Direction.LEFT) {
-                    console.log('Noooooooo');
+                    alert('Noooooooo');
                   }
                   else {
-                    console.log('I like it');
+                    alert('I like it');
                   }
 
                 }}
