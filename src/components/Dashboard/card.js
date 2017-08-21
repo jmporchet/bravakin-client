@@ -7,6 +7,8 @@ import styles from './card.css';
 import Photo from './photo.jpg'
 import faker from 'faker';
 import FakeData from './fakeData.js';
+import KeyHandler, {KEYPRESS} from 'react-key-handler';
+
 
 class Card2 extends Component {
 
@@ -17,7 +19,10 @@ class Card2 extends Component {
     this.state = {
       stack: null
     };
+  }
 
+  alertme = () => {
+    alert('helllooooooo');
   }
 
 
@@ -25,25 +30,37 @@ class Card2 extends Component {
     console.log('FakeData: ', FakeData);
     let ref = 0;
     return FakeData.map((data) =>
-    <div className="card" ref={data.id}
+    <div className="card" throwout={(e)=>console.log('card throwout',e)} ref={data.id}
       style={{backgroundImage: "url(" + data.imageURL + ")", backgroundSize: 'cover', backgroundPosition: 'center'}}>{data.username}</div>  )
     }
 
-
     // throwOut Method
     throwCard() {
-      // Swing Card Directions
-      console.log('Swing.DIRECTION', Swing.DIRECTION);
-      // Directions using fetch
+      const target = this.refs.stack.refs.card11;
 
-      // Swing Component Childrens refs
-      const target = this.refs.stack.refs.card2;
       // get Target Dom Element
       const el = ReactDOM.findDOMNode(target);
+
       // stack.getCard
       const card = this.state.stack.getCard(el);
+
       // throwOut method call
-      card.throwOut(100, 200, Swing.DIRECTION.RIGHT);
+      card.throwOut(100, 200, Swing.DIRECTION.LEFT);
+
+    }
+
+    throwCard2() {
+      const target = this.refs.stack.refs.card11;
+
+      // get Target Dom Element
+      const el2 = ReactDOM.findDOMNode(target);
+
+      // stack.getCard
+      const card2 = this.state.stack.getCard(el2);
+
+      // throwOut method call
+      card2.throwOut(100, 200, Swing.DIRECTION.RIGHT);
+
     }
 
     render() {
@@ -74,8 +91,8 @@ class Card2 extends Component {
               </Swing>
             </div>
             <div className="control">
-              <button>I don't like it</button>
-              <button>I love it</button>
+              <KeyHandler keyEventName={KEYPRESS} keyValue="j" onKeyHandle={this.throwCard.bind(this)} />
+              <KeyHandler keyEventName={KEYPRESS} keyValue="k" onKeyHandle={this.throwCard2.bind(this)} />
             </div>
 
           </div>
