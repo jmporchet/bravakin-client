@@ -17,87 +17,92 @@ class Card2 extends Component {
 
     // An instance of the Stack
     this.state = {
-      stack: null
+      stack: null,
+      cards: FakeData,
+      currentIndex: FakeData.length-1
     };
+
   }
 
-  alertme = () => {
-    alert('helllooooooo');
+  fetchLikeableMedia () {
+    // TODO: fetch likeable media
+    // TODO: when done `this.setState({
+    //  currentIndex: likeableMedia.length,
+    // })`
   }
 
-
-  fakeData = () => {
-    console.log('FakeData: ', FakeData);
-    let ref = 0;
-    return FakeData.map((data) =>
-    <div className="card" throwout={(e)=>console.log('card throwout',e)} ref={data.id}
-      style={{backgroundImage: "url(" + data.imageURL + ")", backgroundSize: 'cover', backgroundPosition: 'center'}}>{data.username}</div>  )
-    }
-
-    // throwOut Method
-    throwCard() {
-      const target = this.refs.stack.refs.card11;
+  throwCard (direction) {
+    return () => {
+      if(this.state.currentIndex < 0) return;
 
       // get Target Dom Element
-      const el = ReactDOM.findDOMNode(target);
-
-      // stack.getCard
+      const el = ReactDOM.findDOMNode(this.refs.stack.refs[`card${this.state.currentIndex}`]);
       const card = this.state.stack.getCard(el);
 
-      // throwOut method call
-      card.throwOut(100, 200, Swing.DIRECTION.LEFT);
-
-    }
-
-    throwCard2() {
-      const target = this.refs.stack.refs.card11;
-
-      // get Target Dom Element
-      const el2 = ReactDOM.findDOMNode(target);
-
-      // stack.getCard
-      const card2 = this.state.stack.getCard(el2);
-
-      // throwOut method call
-      card2.throwOut(100, 200, Swing.DIRECTION.RIGHT);
-
-    }
-
-    render() {
-      return (
-        <div>
-          <div id="viewport">
-
-            {/*
-              Swing Element
-              */}
-              <Swing
-                className="stack"
-                tagName="div"
-                setStack={(stack)=> this.setState({stack:stack})}
-                ref="stack"
-                throwout={(e)=> {
-                  if(e.throwDirection === Direction.LEFT) {
-                    console.log('Noooooooo');
-                  }
-                  else {
-                    console.log('I like it');
-                  }
-
-                }}
-                >
-                {/* children elements is will be Card */}
-                {this.fakeData()}
-              </Swing>
-            </div>
-            <div className="control">
-              <KeyHandler keyEventName={KEYPRESS} keyValue="j" onKeyHandle={this.throwCard.bind(this)} />
-              <KeyHandler keyEventName={KEYPRESS} keyValue="k" onKeyHandle={this.throwCard2.bind(this)} />
-            </div>
-
-          </div>
-        )
+      card.throwOut(100, 200, direction);
+      const cardsLeft = this.state.currentIndex-1;
+      this.setState({currentIndex: cardsLeft});
+      if(cardsLeft < 0){
+        console.log('No more cards');
+        // TODO: call `this.fetchLikeableMedia()`
       }
     }
+  }
 
-    export default Card2;
+  onThrowOut = (e)=> {
+    // TODO: post like
+    if(e.throwDirection === Direction.LEFT) {
+      console.log('Don\'t like it.');
+    }
+    else {
+      console.log('I like it.');
+    }
+  }
+
+  // ============================================== RENDERING
+
+  renderCards() {
+    return this.state.cards.map((data, index) => {
+      const style = {
+        backgroundImage: "url(" + data.imageURL + ")",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      };
+      return (
+        <div
+          className="card"
+          ref={`card${index}`}
+          style={style}
+        >
+          {data.username}
+        </div>
+      );
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <div id="viewport">
+          <Swing
+            className="stack"
+            tagName="div"
+            setStack={(stack)=> {this.setState({stack:stack})}}
+            ref="stack"
+            throwout={this.onThrowOut}
+          >
+            {/* children elements is will be Card */}
+            {this.renderCards()}
+          </Swing>
+        </div>
+        <div className="control">
+          <KeyHandler keyEventName={KEYPRESS} keyValue="j" onKeyHandle={this.throwCard(Direction.LEFT)} />
+          <KeyHandler keyEventName={KEYPRESS} keyValue="l" onKeyHandle={this.throwCard(Direction.RIGHT)} />
+        </div>
+
+      </div>
+    )
+  }
+}
+
+export default Card2;

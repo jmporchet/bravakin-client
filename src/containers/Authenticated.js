@@ -16,7 +16,8 @@ class Authenticated extends React.Component {
   }
 
   render() {
-    if (!this.props.loggedIn) {
+    if (false) {
+    // if (!this.props.loggedIn) {
       return <Redirect to="/sign-in" />
     } else {
       return <div>
