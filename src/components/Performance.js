@@ -1,5 +1,15 @@
 import React from 'react';
+import { Worldmap } from './performance/Worldmap';
 
-const Performance = () => <div><h1>Performance</h1></div>;
+class Performance extends React.Component {
+
+  render () {
+    return (
+      <div>
+        <Worldmap width="800" height="460" />
+      </div>
+    );
+  }
+}
 
 export default Performance;
