@@ -12,10 +12,10 @@ body {
        width: 500px; height: 500px; background: #FFF; border: 10px solid #FFF; margin: 100px auto 0; position: relative;
 }
 #viewport .stack {
-       width: 200px; height: 300px; background: #FFF; position: absolute; top: 100px; left: 50%; margin-left: -100px; border-radius: 10px;
+       width: 200px; height: 300px; background: #FFF; position: absolute; top: 100px; left: 50%; margin-left: -100px;
 }
 #viewport .card {
-       width: 250px; height: 350px; list-style: none;  border-radius: 5px; position: absolute; top: 0; left: 0; box-shadow: 0 0 2px rgba(0,0,0,.2), 1px 1px 1px rgba(0,0,0,.2); text-align: center; color: #FFF; font-size: 20px; border: 2px solid #ECECEC; box-sizing: border-box; cursor: default;
+       width: 250px; height: 350px; list-style: none; border-top: 25px solid white; border-bottom: 25px solid white; background-color: white; position: absolute; top: 0; left: 0; box-shadow: 0 0 2px rgba(0,0,0,.2), 1px 1px 1px rgba(0,0,0,.2); text-align: center; color: #FFF; font-size: 20px; box-sizing: border-box; cursor: default;
 }
 
 #viewport .info {
@@ -42,4 +42,9 @@ body {
 }
 .source a {
        color: #C7433E;
+}
+
+.card {
+       border-radius: 0px !important;
+       border-color: white !important;
 }

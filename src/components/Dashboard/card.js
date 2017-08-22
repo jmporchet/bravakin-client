@@ -19,40 +19,61 @@ class Card2 extends Component {
     this.state = {
       stack: null,
       cards: FakeData,
-      currentIndex: FakeData.length-1
+      currentIndex: 0
     };
 
   }
+  // TODO: fetch likeable media
+  // TODO: when done `this.setState({
+  //  currentIndex: likeableMedia.length,
+  // })`
 
   fetchLikeableMedia () {
-    // TODO: fetch likeable media
-    // TODO: when done `this.setState({
-    //  currentIndex: likeableMedia.length,
-    // })`
+    fetch('https://private-cb530a-bravakin.apiary-mock.com/tags/nature')
+    .then((response) => response.json())
+    .then((likeableMedia) => {
+      console.log(likeableMedia.data.length);
+
+      alert(JSON.stringify(likeableMedia.data))
+      this.setState((prevState) => ({
+        cards: prevState.cards + likeableMedia.data,
+        currentIndex: prevState.currentIndex + likeableMedia.data.length-1,
+
+
+      }));
+      console.log(this.state.currentIndex);
+
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
   throwCard (direction) {
     return () => {
       if(this.state.currentIndex < 0) return;
-
       // get Target Dom Element
       const el = ReactDOM.findDOMNode(this.refs.stack.refs[`card${this.state.currentIndex}`]);
       const card = this.state.stack.getCard(el);
-
       card.throwOut(100, 200, direction);
-      const cardsLeft = this.state.currentIndex-1;
+      const cardsLeft = this.state.currentIndex+1;
       this.setState({currentIndex: cardsLeft});
-      if(cardsLeft < 0){
-        console.log('No more cards');
+      if (cardsLeft > 17) {
+
+        alert('No more cards');
         // TODO: call `this.fetchLikeableMedia()`
+        this.fetchLikeableMedia();
       }
     }
   }
 
+
   onThrowOut = (e)=> {
     // TODO: post like
+
     if(e.throwDirection === Direction.LEFT) {
       console.log('Don\'t like it.');
+
     }
     else {
       console.log('I like it.');
@@ -64,7 +85,7 @@ class Card2 extends Component {
   renderCards() {
     return this.state.cards.map((data, index) => {
       const style = {
-        backgroundImage: "url(" + data.imageURL + ")",
+        backgroundImage: "url(" + "http://www.petmd.com/sites/default/files/hypoallergenic-cat-breeds.jpg" + ")",
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       };
@@ -73,7 +94,7 @@ class Card2 extends Component {
           className="card"
           ref={`card${index}`}
           style={style}
-        >
+          >
           {data.username}
         </div>
       );
@@ -90,7 +111,7 @@ class Card2 extends Component {
             setStack={(stack)=> {this.setState({stack:stack})}}
             ref="stack"
             throwout={this.onThrowOut}
-          >
+            >
             {/* children elements is will be Card */}
             {this.renderCards()}
           </Swing>

@@ -1,17 +1,87 @@
 import faker from 'faker';
 
 const FakeData = [
-  { imageURL: 'https://unsplash.it/600/400/?random',url: 'https://httpstatuses.com/200'},
-  { imageURL: 'https://unsplash.it/600/400/?random',url: 'https://httpstatuses.com/200'},
-  { imageURL: 'https://unsplash.it/600/400/?random',url: 'https://httpstatuses.com/200'},
-  { imageURL: 'https://unsplash.it/600/400/?random',url: 'https://httpstatuses.com/200'},
-  { imageURL: 'https://unsplash.it/600/400/?random',url: 'https://httpstatuses.com/200'},
-  { imageURL: 'https://unsplash.it/600/400/?random',url: 'https://httpstatuses.com/200'},
-  { imageURL: 'https://unsplash.it/600/400/?random',url: 'https://httpstatuses.com/200'},
-  { imageURL: 'https://unsplash.it/600/400/?random',url: 'https://httpstatuses.com/200'},
-  { imageURL: 'https://unsplash.it/600/400/?random',url: 'https://httpstatuses.com/200'},
-  { imageURL: 'https://unsplash.it/600/400/?random',url: 'https://httpstatuses.com/200'},
-  { imageURL: 'https://unsplash.it/600/400/?random',url: 'https://httpstatuses.com/200'}
-]
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    },
+    {
+      "imageUrl": "https://unsplash.it/1536/1024/?random",
+      "postUrl": "%2Fp%2FBX2cAjVlBN5%2F"
+    }
+  ]
+
 
 export default FakeData;
