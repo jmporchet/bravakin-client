@@ -15,11 +15,14 @@ class Card2 extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this.rendered = 0;
+
     // An instance of the Stack
     this.state = {
       stack: null,
       cards: FakeData,
-      currentIndex: 0
+      currentIndex: 0,
+      page: 0,
     };
 
   }
@@ -32,17 +35,10 @@ class Card2 extends Component {
     fetch('https://private-cb530a-bravakin.apiary-mock.com/tags/nature')
     .then((response) => response.json())
     .then((likeableMedia) => {
-      console.log(likeableMedia.data.length);
 
-      alert(JSON.stringify(likeableMedia.data))
-      this.setState((prevState) => ({
-        cards: prevState.cards + likeableMedia.data,
-        currentIndex: prevState.currentIndex + likeableMedia.data.length-1,
-
-
-      }));
-      console.log(this.state.currentIndex);
-
+      this.setState({
+        cards: this.state.cards.concat(likeableMedia.data)
+      });
     })
     .catch((error) => {
       console.error(error);
@@ -51,16 +47,20 @@ class Card2 extends Component {
 
   throwCard (direction) {
     return () => {
-      if(this.state.currentIndex < 0) return;
+
+      if(this.state.currentIndex > this.state.cards.length) return;
+
+      if(this.state.cards.length === 0) return;
       // get Target Dom Element
       const el = ReactDOM.findDOMNode(this.refs.stack.refs[`card${this.state.currentIndex}`]);
       const card = this.state.stack.getCard(el);
       card.throwOut(100, 200, direction);
-      const cardsLeft = this.state.currentIndex+1;
-      this.setState({currentIndex: cardsLeft});
-      if (cardsLeft > 17) {
 
-        alert('No more cards');
+
+      const currentIndex = this.state.currentIndex+1;
+      this.setState({currentIndex: currentIndex});
+
+      if (currentIndex > this.state.cards.length-1) {
         // TODO: call `this.fetchLikeableMedia()`
         this.fetchLikeableMedia();
       }
@@ -70,7 +70,6 @@ class Card2 extends Component {
 
   onThrowOut = (e)=> {
     // TODO: post like
-
     if(e.throwDirection === Direction.LEFT) {
       console.log('Don\'t like it.');
 
@@ -84,14 +83,18 @@ class Card2 extends Component {
 
   renderCards() {
     return this.state.cards.map((data, index) => {
+
       const style = {
-        backgroundImage: "url(" + "http://www.petmd.com/sites/default/files/hypoallergenic-cat-breeds.jpg" + ")",
+        backgroundImage: 'url(http://www.petmd.com/sites/default/files/hypoallergenic-cat-breeds.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       };
+
       return (
         <div
           className="card"
+          id={`card${index}`}
+          key={`card${index}`}
           ref={`card${index}`}
           style={style}
           >
@@ -102,15 +105,18 @@ class Card2 extends Component {
   }
 
   render() {
+    this.rendered++
     return (
       <div>
         <div id="viewport">
           <Swing
             className="stack"
             tagName="div"
-            setStack={(stack)=> {this.setState({stack:stack})}}
+            setStack={(stack)=> {
+              this.setState({stack:stack})
+            }}
             ref="stack"
-            throwout={this.onThrowOut}
+            throwout={this.rendered === 1 ? this.onThrowOut : null}
             >
             {/* children elements is will be Card */}
             {this.renderCards()}
