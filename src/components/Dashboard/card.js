@@ -50,7 +50,6 @@ class Card2 extends Component {
 
       if(this.state.currentIndex > this.state.cards.length) return;
 
-      if(this.state.cards.length === 0) return;
       // get Target Dom Element
       const el = ReactDOM.findDOMNode(this.refs.stack.refs[`card${this.state.currentIndex}`]);
       const card = this.state.stack.getCard(el);
