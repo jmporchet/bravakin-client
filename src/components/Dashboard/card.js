@@ -4,8 +4,6 @@ import Swing from 'react-swing';
 import { Direction } from 'swing';
 
 import styles from './card.css';
-import Photo from './photo.jpg'
-import faker from 'faker';
 import FakeData from './fakeData.js';
 import KeyHandler, {KEYPRESS} from 'react-key-handler';
 
@@ -49,11 +47,28 @@ class Card2 extends Component {
     return () => {
 
       if(this.state.currentIndex > this.state.cards.length) return;
+      console.log(this.state.cards);
 
       // get Target Dom Element
       const el = ReactDOM.findDOMNode(this.refs.stack.refs[`card${this.state.currentIndex}`]);
-      const card = this.state.stack.getCard(el);
-      card.throwOut(100, 200, direction);
+      const postUrl = this.state.cards[this.state.currentIndex].postUrl;
+      console.log(postUrl);
+      console.log('direction', direction);
+
+      if (direction === Direction.RIGHT) {
+        fetch(`https://private-cb530a-bravakin.apiary-mock.com/media/${postUrl}/like`, {
+          method: "PUT",
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ACCESS_TOKEN'
+          }
+        });
+        const card = this.state.stack.getCard(el);
+        card.throwOut(100, 200, direction);
+      } else {
+        const card = this.state.stack.getCard(el);
+        card.throwOut(100, 200, direction);
+      }
 
 
       const currentIndex = this.state.currentIndex+1;
