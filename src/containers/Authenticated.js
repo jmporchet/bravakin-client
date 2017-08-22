@@ -4,7 +4,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 
 import TopMenu from '../components/TopMenu';
 import Dashboard from '../components/Dashboard';
-import Performance from '../components/Performance';
+import PerformanceContainer from '../containers/Performance.container';
 import Preferences from '../components/Preferences';
 
 class Authenticated extends React.Component {
@@ -21,7 +21,7 @@ class Authenticated extends React.Component {
         <TopMenu />
         <Switch>
           <Route exact path="/" component={Dashboard}/>
-          <Route path="/performance" component={Performance}/>
+          <Route path="/performance" component={PerformanceContainer}/>
           <Route path="/preferences" component={Preferences}/>
         </Switch>
       </div>;
