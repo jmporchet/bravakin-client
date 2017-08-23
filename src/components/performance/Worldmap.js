@@ -4,28 +4,33 @@ import { Mercator } from '@vx/geo';
 import * as topojson from 'topojson-client';
 
 import topology from '../../config/world.geo.json';
-import * as worldColors from '../../config/worldmap-colors';
+import { WorldmapColors } from '../../config/chart-colors';
 
 export const Worldmap = ({ width, height, events = false }) => {
   if (width < 10) return <div />;
 
   const world = topojson.feature(topology, topology.objects.units);
-
+  // topojson will somehow delete the keys added to topology,
+  // so any modification has to be done after it.
   // push the API data in here
+
+
   world.features.find((country) => country.id === 'AFG')['heat'] = 1;
   world.features.find((country) => country.id === 'CHE')['heat'] = 10;
   world.features.find((country) => country.id === 'ESP')['heat'] = 5;
   world.features.find((country) => country.id === 'JPN')['heat'] = 7;
-  world.features.find((country) => country.id === 'USA')['heat'] = 9;
+  world.features.find((country) => country.id === 'USA')['heat'] = 10;
+
+console.log(world.features);
 
   function fillColor (country) {
     const heat = country.heat;
-    const percentile = 10 / (worldColors.colors.length -1);
+    const percentile = 10 / (WorldmapColors.length -1);
 
     if (heat) {
-      return worldColors.colors[Math.ceil(heat / percentile)];
+      return WorldmapColors[Math.ceil(heat / percentile)];
     } else {
-      return worldColors.colors[0];
+      return WorldmapColors[0];
     }
   }
 

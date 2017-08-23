@@ -25,7 +25,7 @@ function numTicksForWidth(width) {
   return 10;
 }
 
-export const Linechart = ({
+export default ({
   data,
   width,
   height,
@@ -167,6 +167,4 @@ export const Linechart = ({
 
     </svg>
   );
-
-
 }

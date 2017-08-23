@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Linechart } from '../components/performance/Linechart';
+import Linechart from '../components/performance/Linechart';
 // import { Heatmap } from '../components/performance/Heatmap';
 import { Worldmap } from '../components/performance/Worldmap';
 import LineAndBarsChart from '../components/performance/LineAndBarsChart';
