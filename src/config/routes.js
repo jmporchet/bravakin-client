@@ -1,13 +1,16 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
-import Authenticated from '../containers/Authenticated'
-
+import Authenticated from '../containers/Authenticated';
+import Authorize from '../containers/Authorize';
 import Homepage from '../components/Homepage';
 
-const routes = [
-  <Route key="1" exact path="/sign-in" component={Homepage}/>,
-  <Route key="2" path="" component={Authenticated} />
-]
+const routes = (
+  <Switch>
+    <Route exact path="/sign-in" component={Homepage}/>
+    <Route path="/authorize" component={Authorize} />
+    <Route path="" component={Authenticated} />
+  </Switch>
+);
 
 export default routes;
