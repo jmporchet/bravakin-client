@@ -24,10 +24,6 @@ class Card2 extends Component {
     };
 
   }
-  // TODO: fetch likeable media
-  // TODO: when done `this.setState({
-  //  currentIndex: likeableMedia.length,
-  // })`
 
   fetchLikeableMedia () {
     fetch('https://private-cb530a-bravakin.apiary-mock.com/tags/nature')
@@ -47,13 +43,9 @@ class Card2 extends Component {
     return () => {
 
       if(this.state.currentIndex > this.state.cards.length) return;
-      console.log(this.state.cards);
-
       // get Target Dom Element
       const el = ReactDOM.findDOMNode(this.refs.stack.refs[`card${this.state.currentIndex}`]);
       const postUrl = this.state.cards[this.state.currentIndex].postUrl;
-      console.log(postUrl);
-      console.log('direction', direction);
 
       if (direction === Direction.RIGHT) {
         fetch(`https://private-cb530a-bravakin.apiary-mock.com/media/${postUrl}/like`, {
@@ -99,7 +91,7 @@ class Card2 extends Component {
     return this.state.cards.map((data, index) => {
 
       const style = {
-        backgroundImage: 'url(http://www.petmd.com/sites/default/files/hypoallergenic-cat-breeds.jpg)',
+        backgroundImage: 'url(' + data.imageUrl + ')',
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       };
