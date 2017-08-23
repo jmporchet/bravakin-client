@@ -24,7 +24,7 @@ class PerformanceContainer extends React.Component {
                mode: 'cors',
                cache: 'default' };
 
-    const myRequest = new Request('https://private-cb530a-bravakin.apiary-mock.com/performance?timeframe=week',myInit);
+    const myRequest = new Request('http://localhost:3000/performance?timeframe=day',myInit);
 
     fetch(myRequest)
       .then((response) => response.json())
