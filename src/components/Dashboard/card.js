@@ -18,20 +18,30 @@ class Card2 extends Component {
     // An instance of the Stack
     this.state = {
       stack: null,
-      cards: FakeData,
+      cards: [],
       currentIndex: 0,
-      page: 0,
+      floor: 0,
     };
 
+    this.fetchLikeableMedia()
   }
 
   fetchLikeableMedia () {
-    fetch('https://private-cb530a-bravakin.apiary-mock.com/tags/nature')
+    fetch('http://192.168.0.49:3000/tags/goldenhour', {
+      method: "GET",
+      headers: {
+        'Authorization': 'Bearer 5885499160.38553e7.ccfd98b2185a4fed833163bf17e86b04',
+      }
+    })
     .then((response) => response.json())
     .then((likeableMedia) => {
+      console.log(likeableMedia);
 
+      const newCards = this.state.cards.concat(likeableMedia.data);
       this.setState({
-        cards: this.state.cards.concat(likeableMedia.data)
+        cards: newCards,
+        floor: this.state.cards.length,
+        currentIndex: newCards.length-1
       });
     })
     .catch((error) => {
@@ -42,7 +52,7 @@ class Card2 extends Component {
   throwCard (direction) {
     return () => {
 
-      if(this.state.currentIndex > this.state.cards.length) return;
+      if(this.state.currentIndex < this.state.floor) return;
       // get Target Dom Element
       const el = ReactDOM.findDOMNode(this.refs.stack.refs[`card${this.state.currentIndex}`]);
       const postUrl = this.state.cards[this.state.currentIndex].postUrl;
@@ -52,7 +62,7 @@ class Card2 extends Component {
           method: "PUT",
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ACCESS_TOKEN'
+            'Authorization': 'Bearer 5885499160.38553e7.ccfd98b2185a4fed833163bf17e86b04'
           }
         });
         const card = this.state.stack.getCard(el);
@@ -63,10 +73,10 @@ class Card2 extends Component {
       }
 
 
-      const currentIndex = this.state.currentIndex+1;
+      const currentIndex = this.state.currentIndex - 1;
       this.setState({currentIndex: currentIndex});
 
-      if (currentIndex > this.state.cards.length-1) {
+      if (currentIndex < this.state.floor) {
         // TODO: call `this.fetchLikeableMedia()`
         this.fetchLikeableMedia();
       }
@@ -91,7 +101,7 @@ class Card2 extends Component {
     return this.state.cards.map((data, index) => {
 
       const style = {
-        backgroundImage: 'url(' + data.imageUrl + ')',
+        backgroundImage: 'url(' + data.imageURL + ')',
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       };
