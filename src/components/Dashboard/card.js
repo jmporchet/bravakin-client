@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Swing from 'react-swing';
 import { Direction } from 'swing';
+import { connect } from 'react-redux';
+
 
 import styles from './card.css';
 import FakeData from './fakeData.js';
 import KeyHandler, {KEYPRESS} from 'react-key-handler';
 
 
-const tagsList = [
-  'goldenhour',
-  'nofilter',
-  'landscape'
-]
 
 class Card2 extends Component {
 
@@ -36,7 +33,7 @@ class Card2 extends Component {
 
   fetchLikeableMedia () {
     this.setState({fetching: true});
-    fetch(`http://192.168.0.49:3000/tags/${tagsList[this.state.hashtagIndex]}`, {
+    fetch(`http://192.168.0.49:3000/tags/${this.props.hashtags[this.state.hashtagIndex]}`, {
       method: "GET",
       headers: {
         'Authorization': 'Bearer 5885499160.38553e7.ccfd98b2185a4fed833163bf17e86b04',
@@ -52,7 +49,7 @@ class Card2 extends Component {
         floor: this.state.cards.length,
         currentIndex: newCards.length-1,
         fetching: false,
-        hashtagIndex: (this.state.hashtagIndex+1)%tagsList.length
+        hashtagIndex: (this.state.hashtagIndex+1)%this.props.hashtags.length
       });
     })
     .catch((error) => {
@@ -179,4 +176,8 @@ class Card2 extends Component {
   }
 }
 
-export default Card2;
+const mapStateToProps = (state) => ({
+  hashtags: state.userProfile.hashtags
+})
+
+export default connect(mapStateToProps)(Card2);
