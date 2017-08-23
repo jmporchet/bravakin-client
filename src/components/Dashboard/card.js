@@ -8,6 +8,12 @@ import FakeData from './fakeData.js';
 import KeyHandler, {KEYPRESS} from 'react-key-handler';
 
 
+const tagsList = [
+  'goldenhour',
+  'nofilter',
+  'landscape'
+]
+
 class Card2 extends Component {
 
   constructor(props, context) {
@@ -20,14 +26,17 @@ class Card2 extends Component {
       stack: null,
       cards: [],
       currentIndex: 0,
-      floor: 0,
+      page: 0,
+      fetching: true,
+      hashtagIndex: 0
     };
 
     this.fetchLikeableMedia()
   }
 
   fetchLikeableMedia () {
-    fetch('http://192.168.0.49:3000/tags/goldenhour', {
+    this.setState({fetching: true});
+    fetch(`http://192.168.0.49:3000/tags/${tagsList[this.state.hashtagIndex]}`, {
       method: "GET",
       headers: {
         'Authorization': 'Bearer 5885499160.38553e7.ccfd98b2185a4fed833163bf17e86b04',
@@ -41,7 +50,9 @@ class Card2 extends Component {
       this.setState({
         cards: newCards,
         floor: this.state.cards.length,
-        currentIndex: newCards.length-1
+        currentIndex: newCards.length-1,
+        fetching: false,
+        hashtagIndex: (this.state.hashtagIndex+1)%tagsList.length
       });
     })
     .catch((error) => {
@@ -58,13 +69,6 @@ class Card2 extends Component {
       const postUrl = this.state.cards[this.state.currentIndex].postUrl;
 
       if (direction === Direction.RIGHT) {
-        fetch(`https://private-cb530a-bravakin.apiary-mock.com/media/${postUrl}/like`, {
-          method: "PUT",
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer 5885499160.38553e7.ccfd98b2185a4fed833163bf17e86b04'
-          }
-        });
         const card = this.state.stack.getCard(el);
         card.throwOut(100, 200, direction);
       } else {
@@ -86,12 +90,26 @@ class Card2 extends Component {
 
   onThrowOut = (e)=> {
     // TODO: post like
+    const cardId = e.target.getAttribute('id').split('card')[1];
+    const media = this.state.cards[cardId];
+    console.log(media);
+
     if(e.throwDirection === Direction.LEFT) {
       console.log('Don\'t like it.');
 
     }
     else {
       console.log('I like it.');
+      fetch(`http://192.168.0.49:3000/media/like`, {
+        method: 'POST',
+        body: JSON.stringify({
+          url: media.url
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer 5885499160.38553e7.ccfd98b2185a4fed833163bf17e86b04'
+        }
+      });
     }
   }
 
@@ -120,11 +138,24 @@ class Card2 extends Component {
     })
   }
 
+  renderLoadingIndicator () {
+    if(!this.state.fetching) return null;
+
+    return (
+      <div className="loading-container">
+        <img
+          className="loading"
+          src="https://s-media-cache-ak0.pinimg.com/originals/86/07/37/86073779879c4777c617c6cea2e9eac6.gif" />
+      </div>
+    )
+  }
+
   render() {
     this.rendered++
     return (
       <div>
         <div id="viewport">
+          {this.renderLoadingIndicator()}
           <Swing
             className="stack"
             tagName="div"

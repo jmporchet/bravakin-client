@@ -11,8 +11,26 @@ body {
 #viewport {
        width: 500px; height: 500px; background: #FFF; border: 10px solid #FFF; margin: 100px auto 0; position: relative;
 }
+
+#viewport .loading-container {
+       margin: 90px auto;
+       height: 300px;
+       width: 300px;
+       background-color: rgba(250, 222, 0, 1);
+       border-radius: 100%;
+}
+#viewport .loading{
+       margin: 50px 50px;
+       height: 200px;
+       width: 200px;
+
+}
 #viewport .stack {
-       width: 200px; height: 300px; background: #FFF; position: absolute; top: 100px; left: 50%; margin-left: -100px;
+       width: 290px;
+       height: 390px;
+       position: absolute;
+       top: 46px;
+       left: 95px;
 }
 #viewport .card {
        width: 290px; height: 390px; list-style: none; border-top: 25px solid white; border-bottom: 25px solid white; background-color: white; position: absolute; top: 0; left: 0; box-shadow: 0 0 2px rgba(0,0,0,.2), 1px 1px 1px rgba(0,0,0,.2); text-align: center; color: #FFF; font-size: 20px; box-sizing: border-box; cursor: default;
