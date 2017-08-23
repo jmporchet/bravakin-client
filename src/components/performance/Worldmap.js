@@ -21,8 +21,6 @@ export const Worldmap = ({ width, height, events = false }) => {
   world.features.find((country) => country.id === 'JPN')['heat'] = 7;
   world.features.find((country) => country.id === 'USA')['heat'] = 10;
 
-console.log(world.features);
-
   function fillColor (country) {
     const heat = country.heat;
     const percentile = 10 / (WorldmapColors.length -1);
