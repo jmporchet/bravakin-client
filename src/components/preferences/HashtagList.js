@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import { addHashtag } from '../../actions';
 
 import HashtagForm from './HashtagForm'
+import { ListGroup, ListGroupItem } from 'reactstrap';
 
 class HashtagList extends React.Component {
 
   renderHashtags () {
-    return this.props.hashtags.map((el, index) => <li key={index}>{el}</li>)
+    return this.props.hashtags.map((el, index) => <ListGroupItem key={index}>{el}</ListGroupItem>)
   };
 
   handleSubmit = (formData) => {
@@ -39,9 +40,9 @@ class HashtagList extends React.Component {
   render() {
     return (
       <div>
-        <ul>
+        <ListGroup>
           {this.renderHashtags()}
-        </ul>
+        </ListGroup>
         <HashtagForm onSubmit={this.handleSubmit} />
       </div>
 

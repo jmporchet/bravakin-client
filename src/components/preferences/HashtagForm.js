@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Button } from 'reactstrap';
+import Boostrap from './bootstrap.css';
 
 const HashtagForm = props => {
     const { handleSubmit } = props;
@@ -14,6 +15,7 @@ const HashtagForm = props => {
             component="input"
             type="text"
             placeholder="hashtags"
+            className="form-control"
             />
           </div>
         </div>
