@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import { addPeople } from '../../actions';
 
 import PeopleForm from './PeopleForm'
+import { ListGroup, ListGroupItem } from 'reactstrap';
+
 
 class PeopleList extends React.Component {
 
 
   renderinteresting_people () {
-    return this.props.interesting_people.map((el, index) => <li key={index}>{el}</li>)
+    return this.props.interesting_people.map((el, index) => <ListGroupItem key={index}>{el}</ListGroupItem>)
   };
 
   handleSubmit = (formData) => {
@@ -41,9 +43,9 @@ class PeopleList extends React.Component {
   render() {
     return (
       <div>
-        <ul>
+        <ListGroup>
           {this.renderinteresting_people()}
-        </ul>
+        </ListGroup>
         <PeopleForm onSubmit={this.handleSubmit} />
       </div>
 
