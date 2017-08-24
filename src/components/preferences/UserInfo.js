@@ -5,7 +5,6 @@ import './bootstrap.css';
 import './style.css';
 
 class UserInfo extends React.Component {
-  // Trying to get data from fetch ?using props?
   render() {
     return(
       <div>
