@@ -68,9 +68,9 @@ class PerformanceContainer extends React.Component {
     if(!this.state.mapData) return null;
     return (
       <div>
-        <h2>Likes and Comments performance</h2>
+        <h2>Likes and Comments</h2>
         <LineAndBarsChart data={this.state.commentsAndLikes} width="800" height="460" />
-        <h2>Followers performance</h2>
+        <h2>Followers</h2>
         <Linechart data={this.state.commentsAndLikes} width="800" height="460" />
         {/* <h2>Best time to post</h2>
         <Heatmap width="800" height="460" /> */}
