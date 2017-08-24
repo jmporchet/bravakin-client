@@ -1,0 +1,27 @@
+.hero {
+  margin-top: 35%;
+  margin-left: 10%;
+  color: white;
+
+}
+
+.hero:hover {
+  filter: drop-shadow(0 0 10px white);
+}
+
+.signin {
+  margin-top: 45%;
+  margin-left: 32%;
+}
+
+.instagram {
+
+}
+.pic {
+  background-image: url('https://source.unsplash.com/IEHPDNk2-8w/1600x900');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #0365C0;
+  height: 100vh;
+  width: 100vh;
+}
