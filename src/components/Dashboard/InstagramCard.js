@@ -11,7 +11,7 @@ import KeyHandler, {KEYPRESS} from 'react-key-handler';
 
 
 
-class Card2 extends Component {
+class InstagramCard extends Component {
 
   constructor(props, context) {
     super(props, context);
@@ -36,7 +36,7 @@ class Card2 extends Component {
     fetch(`http://192.168.0.49:3000/tags/${this.props.hashtags[this.state.hashtagIndex]}`, {
       method: "GET",
       headers: {
-        'Authorization': 'Bearer 5885499160.38553e7.ccfd98b2185a4fed833163bf17e86b04',
+        'Authorization': 'Bearer ' + this.props.access_token
       }
     })
     .then((response) => response.json())
@@ -78,7 +78,6 @@ class Card2 extends Component {
       this.setState({currentIndex: currentIndex});
 
       if (currentIndex < this.state.floor) {
-        // TODO: call `this.fetchLikeableMedia()`
         this.fetchLikeableMedia();
       }
     }
@@ -86,17 +85,14 @@ class Card2 extends Component {
 
 
   onThrowOut = (e)=> {
-    // TODO: post like
     const cardId = e.target.getAttribute('id').split('card')[1];
     const media = this.state.cards[cardId];
     console.log(media);
 
     if(e.throwDirection === Direction.LEFT) {
-      console.log('Don\'t like it.');
 
     }
     else {
-      console.log('I like it.');
       fetch(`http://192.168.0.49:3000/media/like`, {
         method: 'POST',
         body: JSON.stringify({
@@ -104,7 +100,7 @@ class Card2 extends Component {
         }),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer 5885499160.38553e7.ccfd98b2185a4fed833163bf17e86b04'
+          'Authorization': 'Bearer ' + this.props.access_token
         }
       });
     }
@@ -180,4 +176,4 @@ const mapStateToProps = (state) => ({
   hashtags: state.userProfile.hashtags
 })
 
-export default connect(mapStateToProps)(Card2);
+export default connect(mapStateToProps)(InstagramCard);

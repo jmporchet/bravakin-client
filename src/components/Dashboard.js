@@ -1,11 +1,11 @@
 import React from 'react';
-import Card2 from './Dashboard/card';
+import InstagramCard from './Dashboard/InstagramCard';
 
 class Dashboard extends React.Component {
     render() {
         return(
             <div>
-                <Card2 />
+                <InstagramCard />
             </div>
         )
     }
