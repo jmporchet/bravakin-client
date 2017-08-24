@@ -3,7 +3,6 @@ import {Field, reduxForm} from 'redux-form';
 import { Button,  } from 'reactstrap';
 import './bootstrap.css';
 
-
 const PeopleForm = props => {
   const { handleSubmit } = props;
   return(
