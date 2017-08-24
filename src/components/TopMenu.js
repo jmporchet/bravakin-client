@@ -16,25 +16,20 @@ class TopMenu extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
+
   render() {
     return (
-      <div>
-        <Navbar color="faded" light toggleable>
-          <NavbarToggler right onClick={this.toggle} />
-          <NavbarBrand href="/">Bravakin</NavbarBrand>
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/performance">Performance</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/preferences">Preferences</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
+      <div className="top-menu">
+        <div className="container">
+          <nav style={{flex:1}}>
+            <Link to="/">Dashboard</Link>
+            <Link to="/performance">Performance</Link>
+            <Link to="/preferences">Preferences</Link>
+          </nav>
+          <div><span><strong>Bravakin</strong></span></div>
+        </div>
       </div>
-    );
+    )
   }
 }
 
