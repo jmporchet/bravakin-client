@@ -4,7 +4,7 @@ import Swing from 'react-swing';
 import { Direction } from 'swing';
 import { connect } from 'react-redux';
 
-import styles from './card.css';
+import './card.css';
 import KeyHandler, {KEYPRESS} from 'react-key-handler';
 
 
@@ -60,7 +60,6 @@ class InstagramCard extends Component {
       if(this.state.currentIndex < this.state.floor) return;
       // get Target Dom Element
       const el = ReactDOM.findDOMNode(this.refs.stack.refs[`card${this.state.currentIndex}`]);
-      const postUrl = this.state.cards[this.state.currentIndex].postUrl;
 
       if (direction === Direction.RIGHT) {
         const card = this.state.stack.getCard(el);
@@ -135,7 +134,7 @@ class InstagramCard extends Component {
       <div className="loading-container">
         <img
           className="loading"
-          src="https://s-media-cache-ak0.pinimg.com/originals/86/07/37/86073779879c4777c617c6cea2e9eac6.gif" />
+          src="https://s-media-cache-ak0.pinimg.com/originals/86/07/37/86073779879c4777c617c6cea2e9eac6.gif" alt="loading" />
       </div>
     )
   }
