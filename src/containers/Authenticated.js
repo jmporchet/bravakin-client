@@ -2,7 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
-import { addUser } from '../actions';
+import {
+  addUser,
+  setPerformanceData,
+  setInfluenceData,
+} from '../actions';
 
 import TopMenu from '../components/TopMenu'
 import Dashboard from '../components/Dashboard';
@@ -15,19 +19,25 @@ class Authenticated extends React.Component {
     this.state = { access_token: null };
   }
 
-  componentWillMount() {
-    fetch('https://private-cb530a-bravakin.apiary-mock.com/me')
-    .then((response) => response.json())
-    .then((response) => {
-      this.props.addUser(response.data.username);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+
+  componentWillMount () {
+    this.fetchOptions = {
+      method: 'GET',
+      headers: {
+       'Content-Type': 'application/json',
+       'Authorization': 'Bearer ' + this.props.access_token
+      },
+      mode: 'cors',
+      cache: 'default'
+    };
+
+    this.fetchUserData();
+    this.fetchCommentsAndLikes();
+    this.fetchMapData();
   }
 
   render () {
-    if (!this.state.access_token) {
+    if (!this.props.access_token) {
       return <Redirect to="/sign-in" />;
     } else {
       return (
@@ -44,6 +54,45 @@ class Authenticated extends React.Component {
       )
     }
   }
+
+
+  fetchUserData () {
+    fetch(new Request('https://localhost:3000/me', this.fetchOptions))
+    .then((response) => response.json())
+    .then((response) => {
+      this.props.addUser(response.data.username);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
+  fetchCommentsAndLikes () {
+    fetch(new Request('http://localhost:3000/performance?timeframe=day', this.fetchOptions))
+      .then((response) => response.json())
+      .then((response) => {
+        const processedData = response.stats.map(el => {
+          return Object.assign({}, el, {
+            date: new Date(el.date)
+          });
+        });
+        this.props.setPerformanceData(processedData)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  fetchMapData() {
+    fetch(new Request('http://localhost:3000/influence', this.fetchOptions))
+      .then((response) => response.json())
+      .then((response) => {
+        this.props.setInfluenceData(response.data)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 }
 
 const mapStateToProps = (state) => ({
@@ -52,8 +101,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addUser: (user) => dispatch(addUser(user))
-
+  addUser: (user) => dispatch(addUser(user)),
+  setPerformanceData: (data) => dispatch(setPerformanceData(data)),
+  setInfluenceData: (data) => dispatch(setInfluenceData(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Authenticated);
