@@ -16,7 +16,6 @@ const PeopleForm = props => {
             type="text"
             placeholder="User"
             />
-
         </div>
       </div>
       <br/>
