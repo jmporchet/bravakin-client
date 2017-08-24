@@ -1,0 +1,34 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #fafafa !important;
+}
+
+.container   {
+  padding: 20px;
+}
+
+
+/* =================== TOP MENU */
+
+.top-menu {
+  height: 64px;
+  background-color: white;
+  border-bottom: 1px solid #DDD;
+}
+
+.top-menu .container {
+  display: flex;
+  align-items: center;
+  padding: 20;
+}
+
+.top-menu a {
+  padding-right: 20px;
+  color: #888;
+}
+
+.top-menu a:hover {
+  color: #333;
+  text-decoration: none;
+}

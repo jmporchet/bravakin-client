@@ -6,7 +6,7 @@ import { addUser } from '../actions';
 
 import TopMenu from '../components/TopMenu'
 import Dashboard from '../components/Dashboard';
-import Performance from '../components/Performance';
+import PerformanceContainer from '../containers/Performance.container';
 import Preferences from '../components/Preferences';
 
 class Authenticated extends React.Component {
@@ -27,17 +27,19 @@ class Authenticated extends React.Component {
   }
 
   render () {
-    if (!this.props.access_token) {
+    if (!this.state.access_token) {
       return <Redirect to="/sign-in" />;
     } else {
       return (
         <div>
           <TopMenu />
-          <Switch>
-            <Route exact path="/" component={Dashboard}/>
-            <Route path="/performance" component={Performance}/>
-            <Route path="/preferences" component={Preferences}/>
-          </Switch>
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={Dashboard}/>
+              <Route path="/performance" component={PerformanceContainer}/>
+              <Route path="/preferences" component={Preferences}/>
+            </Switch>
+          </div>
         </div>
       )
     }
