@@ -1,6 +1,7 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import { Button,  } from 'reactstrap';
+import './bootstrap.css';
 
 
 const PeopleForm = props => {
@@ -14,6 +15,7 @@ const PeopleForm = props => {
             name="User"
             component = 'input'
             type="text"
+            className="form-control"
             placeholder="User"
             />
 
