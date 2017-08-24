@@ -27,17 +27,21 @@ class Authenticated extends React.Component {
   }
 
   render () {
-    if (!this.props.access_token) {
+    if (false) {
       return <Redirect to="/sign-in" />;
     } else {
-      return <div>
-        <TopMenu />
-        <Switch>
-          <Route exact path="/" component={Dashboard}/>
-          <Route path="/performance" component={PerformanceContainer}/>
-          <Route path="/preferences" component={Preferences}/>
-        </Switch>
-      </div>;
+      return (
+        <div>
+          <TopMenu />
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={Dashboard}/>
+              <Route path="/performance" component={PerformanceContainer}/>
+              <Route path="/preferences" component={Preferences}/>
+            </Switch>
+          </div>
+        </div>
+      )
     }
   }
 }
