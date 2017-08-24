@@ -28,7 +28,7 @@ export default ({
 }) => {
   if (width < 10) return null;
   data = data.reverse();
-  data.map((el, index, data) => {
+  data.forEach((el, index, data) => {
     el['engagement'] = (index === 0) ?
       el.likes + el.comments :
       data[index-1].engagement + el.likes + el.comments

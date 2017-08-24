@@ -6,20 +6,14 @@ import * as topojson from 'topojson-client';
 import topology from '../../config/world.geo.json';
 import { WorldmapColors } from '../../config/chart-colors';
 
-export const Worldmap = ({ width, height, events = false }) => {
+export default ({ data, width, height, events = false }) => {
   if (width < 10) return <div />;
 
   const world = topojson.feature(topology, topology.objects.units);
-  // topojson will somehow delete the keys added to topology,
-  // so any modification has to be done after it.
-  // push the API data in here
 
-
-  world.features.find((country) => country.id === 'AFG')['heat'] = 1;
-  world.features.find((country) => country.id === 'CHE')['heat'] = 10;
-  world.features.find((country) => country.id === 'ESP')['heat'] = 5;
-  world.features.find((country) => country.id === 'JPN')['heat'] = 7;
-  world.features.find((country) => country.id === 'USA')['heat'] = 10;
+  data.locations.forEach(location => {
+    world.features.find((country) => country.id === location.id)['heat'] = location.heat;
+  })
 
   function fillColor (country) {
     const heat = country.heat;
@@ -54,10 +48,6 @@ export const Worldmap = ({ width, height, events = false }) => {
         translate={[width / 2, height / 2 + 50]}
         fill={(country) => fillColor(country)}
         stroke={() => '#5fcfa7'}
-        onClick={data => event => {
-          if (!events) return;
-          alert(`Clicked: ${data.properties.name} (${data.id})`);
-        }}
       />
     </svg>
   );
