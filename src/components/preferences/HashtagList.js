@@ -8,12 +8,12 @@ import HashtagForm from './HashtagForm'
 class HashtagList extends React.Component {
 
   renderHashtags () {
-    return this.props.hashtags.map((el, index) => <li key={index}>{el}</li>)
+    return this.props.hashtags.map((el, index) => <li key={index}>#{el}</li>)
   };
 
   handleSubmit = (formData) => {
     const { hashtags } = formData;
-    this.props.addHashtag('#' + hashtags);
+    this.props.addHashtag(hashtags);
 
     var body = {
       'update': {
