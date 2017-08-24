@@ -4,8 +4,8 @@ import { Redirect } from 'react-router-dom';
 
 import conf from '../private/conf';
 import FontAwesome from 'react-fontawesome';
-import { Container, Row, Col, Button } from 'reactstrap';
-import Style from './style.css';
+import { Row, Col, Button } from 'reactstrap';
+import './style.css';
 
 class Homepage extends React.Component {
 

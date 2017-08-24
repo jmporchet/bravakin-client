@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Button } from 'reactstrap';
-import Bootstrap from './bootstrap.css';
+import  './bootstrap.css';
 
 
 const UserSettings = props => {

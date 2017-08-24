@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import HashtagList from './preferences/HashtagList'
 import PeopleList from './preferences/PeopleList'
 import UserSettings from './preferences/UserSettings'

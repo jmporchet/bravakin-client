@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addUser } from '../../actions';
-import Bootstrap from './bootstrap.css';
+import './bootstrap.css';
 import './style.css';
 
 class UserInfo extends React.Component {
