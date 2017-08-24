@@ -13,7 +13,6 @@ import { Grid } from '@vx/grid';
 
 // accessors
 const xDate = d => d.date;
-const y = d => d.value;
 const yLine = d => d.engagement;
 
 export default ({
@@ -167,7 +166,7 @@ export default ({
       <Group top={margin.top} left={margin.left+7}>
         <AreaClosed
           data={data}
-          xScale={xLineScale}
+          xScale={x0Scale}
           yScale={yLineScale}
           x={xDate}
           y={yLine}
@@ -179,9 +178,9 @@ export default ({
         <LinePath
           data={data}
           xScale={x0Scale}
-          yScale={yScale}
+          yScale={yLineScale}
           x={xDate}
-          y={y}
+          y={yLine}
           stroke="url('#orangeRed')"
           strokeWidth={2}
           curve={curveMonotoneX}
