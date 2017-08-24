@@ -41,7 +41,6 @@ class InstagramCard extends Component {
     })
     .then((response) => response.json())
     .then((likeableMedia) => {
-      console.log(likeableMedia);
 
       const newCards = this.state.cards.concat(likeableMedia.data);
       this.setState({
@@ -89,10 +88,7 @@ class InstagramCard extends Component {
     const media = this.state.cards[cardId];
     console.log(media);
 
-    if(e.throwDirection === Direction.LEFT) {
-
-    }
-    else {
+    if(e.throwDirection === Direction.RIGHT) {
       fetch(`http://192.168.0.49:3000/media/like`, {
         method: 'POST',
         body: JSON.stringify({
@@ -104,76 +100,76 @@ class InstagramCard extends Component {
         }
       });
     }
-  }
 
-  // ============================================== RENDERING
 
-  renderCards() {
-    return this.state.cards.map((data, index) => {
+    // ============================================== RENDERING
 
-      const style = {
-        backgroundImage: 'url(' + data.imageURL + ')',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      };
+    renderCards() {
+      return this.state.cards.map((data, index) => {
+
+        const style = {
+          backgroundImage: 'url(' + data.imageURL + ')',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        };
+
+        return (
+          <div
+            className="card"
+            id={`card${index}`}
+            key={`card${index}`}
+            ref={`card${index}`}
+            style={style}
+            >
+            {data.username}
+          </div>
+        );
+      })
+    }
+
+    renderLoadingIndicator () {
+      if(!this.state.fetching) return null;
 
       return (
-        <div
-          className="card"
-          id={`card${index}`}
-          key={`card${index}`}
-          ref={`card${index}`}
-          style={style}
-          >
-          {data.username}
+        <div className="loading-container">
+          <img
+            className="loading"
+            src="https://s-media-cache-ak0.pinimg.com/originals/86/07/37/86073779879c4777c617c6cea2e9eac6.gif" />
         </div>
-      );
-    })
+      )
+    }
+
+    render() {
+      this.rendered++
+      return (
+        <div>
+          <div id="viewport">
+            {this.renderLoadingIndicator()}
+            <Swing
+              className="stack"
+              tagName="div"
+              setStack={(stack)=> {
+                this.setState({stack:stack})
+              }}
+              ref="stack"
+              throwout={this.rendered === 1 ? this.onThrowOut : null}
+              >
+              {/* children elements is will be Card */}
+              {this.renderCards()}
+            </Swing>
+          </div>
+          <div className="control">
+            <KeyHandler keyEventName={KEYPRESS} keyValue="j" onKeyHandle={this.throwCard(Direction.LEFT)} />
+            <KeyHandler keyEventName={KEYPRESS} keyValue="l" onKeyHandle={this.throwCard(Direction.RIGHT)} />
+          </div>
+
+        </div>
+      )
+    }
   }
 
-  renderLoadingIndicator () {
-    if(!this.state.fetching) return null;
+  const mapStateToProps = (state) => ({
+    hashtags: state.userProfile.hashtags
+  })
 
-    return (
-      <div className="loading-container">
-        <img
-          className="loading"
-          src="https://s-media-cache-ak0.pinimg.com/originals/86/07/37/86073779879c4777c617c6cea2e9eac6.gif" />
-      </div>
-    )
-  }
-
-  render() {
-    this.rendered++
-    return (
-      <div>
-        <div id="viewport">
-          {this.renderLoadingIndicator()}
-          <Swing
-            className="stack"
-            tagName="div"
-            setStack={(stack)=> {
-              this.setState({stack:stack})
-            }}
-            ref="stack"
-            throwout={this.rendered === 1 ? this.onThrowOut : null}
-            >
-            {/* children elements is will be Card */}
-            {this.renderCards()}
-          </Swing>
-        </div>
-        <div className="control">
-          <KeyHandler keyEventName={KEYPRESS} keyValue="j" onKeyHandle={this.throwCard(Direction.LEFT)} />
-          <KeyHandler keyEventName={KEYPRESS} keyValue="l" onKeyHandle={this.throwCard(Direction.RIGHT)} />
-        </div>
-
-      </div>
-    )
-  }
-}
-
-const mapStateToProps = (state) => ({
-  hashtags: state.userProfile.hashtags
-})
-
-export default connect(mapStateToProps)(InstagramCard);
+  export default connect(mapStateToProps)(InstagramCard);
