@@ -4,7 +4,7 @@
   "description": "Bravakin client",
   "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
@@ -23,6 +23,14 @@
     "@kadira/storybook": "^2.35.3",
     "axios": "^0.16.2",
     "bootstrap": "^4.0.0-beta",
+    "@vx/axis": "0.0.136",
+    "@vx/geo": "0.0.135",
+    "@vx/gradient": "0.0.136",
+    "@vx/grid": "0.0.136",
+    "@vx/heatmap": "0.0.136",
+    "@vx/mock-data": "0.0.136",
+    "@vx/scale": "0.0.136",
+    "@vx/shape": "0.0.136",
     "gulp": "^3.9.1",
     "gulp-eslint": "^4.0.0",
     "gulp-load-plugins": "^1.5.0",
@@ -50,6 +58,7 @@
     "reactstrap": "^4.8.0",
     "redux": "^3.7.2",
     "redux-form": "^7.0.3",
+    "topojson-client": "^3.0.0",
     "redux-form-material-ui": "^4.2.0"
   },
   "devDependencies": {
