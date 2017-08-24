@@ -10,8 +10,7 @@ import Style from './style.css';
 class Homepage extends React.Component {
 
   loginClick = () => {
-    // temporary solution to get the token without redirecting to bravakin-server
-    window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=${conf.INSTAGRAM_CLIENT_ID}&redirect_uri=${conf.OAUTH_CB_URL}&response_type=token`
+    window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=${conf.INSTAGRAM_CLIENT_ID}&redirect_uri=${conf.OAUTH_CB_URL}&response_type=code`
   }
 
   render () {
