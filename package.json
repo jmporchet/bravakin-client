@@ -49,7 +49,7 @@
     "reactstrap": "^4.8.0",
     "redux": "^3.7.2",
     "redux-form": "^7.0.3",
-    "topojson-client": "^3.0.0"
+    "topojson-client": "^3.0.0",
     "redux-form-material-ui": "^4.2.0"
   },
   "devDependencies": {
