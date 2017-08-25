@@ -9,3 +9,7 @@ export const ADD_PEOPLE = 'ADD_PEOPLE';
 export const ADD_USER = 'ADD_USER';
 
 export const FETCH_USER_DATA = 'FETCH_USER_DATA';
+
+export const SET_INFLUENCE_DATA = 'SET_INFLUENCE_DATA';
+
+export const SET_PERFORMANCE_DATA = 'SET_PERFORMANCE_DATA';

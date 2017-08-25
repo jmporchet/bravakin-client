@@ -6,34 +6,26 @@ import { scaleTime, scaleBand, scaleLinear, scaleOrdinal } from '@vx/scale';
 import { curveMonotoneX } from '@vx/curve';
 import { timeFormat } from 'd3-time-format';
 import { extent, max } from 'd3-array';
-
-
 import { Grid } from '@vx/grid';
 
 
 // accessors
 const xDate = d => d.date;
 const yLine = d => d.engagement;
+const yBar = d => Math.max(d.likes, d.comments)
 
 export default ({
   data,
   width,
   height,
   margin = {
-    top: 40,
-    left: 20,
+    top: 10,
+    left: 50,
     right: 20,
     bottom: 100,
   }
 }) => {
   if (width < 10) return null;
-  data = data.reverse();
-  data.forEach((el, index, data) => {
-    el['engagement'] = (index === 0) ?
-      el.likes + el.comments :
-      data[index-1].engagement + el.likes + el.comments
-    }
-  );
 
   const keys = Object.keys(data[0]).filter(d => d !== 'date' && d !== 'followers' && d !== 'engagement');
   const format = timeFormat("%H");
@@ -41,44 +33,45 @@ export default ({
 
 
   // bounds
-  const xMax = width;
-  const yMax = height - margin.top - 100;
-
-  const xLineMax = width - margin.left - margin.right;
-  const yLineMax = height - margin.top - margin.bottom;
+  const xMax = width - margin.left - margin.right;
+  const yMax = height - margin.top - margin.bottom;
 
   // Bar scales
+  // hours on x axis
   const x0Scale = scaleBand({
-    rangeRound: [0, xLineMax],
+    rangeRound: [0, xMax],
     domain: data.map(xDate),
-    padding: 0.2,
+    padding: 0.1,
     tickFormat: () => (val) => formatDate(val)
   });
+
   const x1Scale = scaleBand({
     rangeRound: [0, x0Scale.bandwidth()],
     domain: keys,
-    padding: .1
+    padding: 0.1
   });
-  const yScale = scaleLinear({
-    rangeRound: [yMax, 0],
-    domain: [0, max(data, (d) => {
-      return max(keys, (key) => d[key])
-    })],
-  });
+
+  // colors for the bars
   const zScale = scaleOrdinal({
     domain: keys,
     range: ['#aeeef8', '#e5fd3d']
   });
-  // Line scales
+
+  // Engagement line scales
   const xLineScale = scaleTime({
-    range: [0, xLineMax],
+    range: [0, xMax],
     domain: extent(data, xDate),
   });
   const yLineScale = scaleLinear({
-    range: [yLineMax, 0],
+    range: [yMax, 0],
     domain: [0, max(data, yLine)],
     nice: true,
   });
+  const yBarScale = scaleLinear({
+    range: [yMax ,0],
+    domain: [0, max(data, yBar)],
+    nice: true,
+  })
 
   // responsive utils for axis ticks
   function numTicksForHeight(height) {
@@ -90,17 +83,16 @@ export default ({
   function numTicksForWidth(width) {
     if (width <= 300) return 3;
     if (300 < width && width <= 400) return 6;
-    return 8;
+    return 12;
   }
 
   return (
-    <svg width={width} height={height}
-      style={{marginLeft:20+'px'}}>
+    <svg width={width} height={height} >
       <Grid
         top={margin.top}
-        left={margin.left+7}
+        left={margin.left}
         xScale={xLineScale}
-        yScale={yScale}
+        yScale={yLineScale}
         stroke='#8a265f'
         strokeDasharray='1,15'
         width={xMax}
@@ -111,7 +103,7 @@ export default ({
       <AxisLeft
         top={margin.top}
         left={margin.left}
-        scale={yScale}
+        scale={yLineScale}
         hideZero
         numTicks={numTicksForHeight(height)}
         label={
@@ -136,32 +128,35 @@ export default ({
             />
           }
         />
+        <AxisBottom
+          scale={xLineScale}
+          top={height - margin.bottom}
+          left={margin.left}
+          numTicks={numTicksForWidth(width)}
+          stroke='#1b1a1e'
+          tickStroke='#1b1a1e'
+          tickLabelComponent={(
+            <text
+              fill="#8e205f"
+              textAnchor="middle"
+              fontSize={10}
+              fontFamily="Arial"
+              dy="0.25em"
+            />
+          )}
+        />
       <BarGroup
         top={margin.top}
-        left={7}
+        left={margin.left}
         data={data}
         keys={keys}
         height={yMax}
         x0={xDate}
         x0Scale={x0Scale}
         x1Scale={x1Scale}
-        yScale={yScale}
+        yScale={yBarScale}
         zScale={zScale}
         rx={4}
-      />
-      <AxisBottom
-        scale={xLineScale}
-        left={margin.left+7}
-        top={yMax + margin.top}
-        stroke='#e5fd3d'
-        tickStroke='#e5fd3d'
-        tickLabelComponent={(
-          <text
-            fill='#612efb'
-            fontSize={11}
-            textAnchor="middle"
-          />
-        )}
       />
       <Group top={margin.top} left={margin.left+7}>
         <AreaClosed

@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Linechart from '../components/performance/Linechart';
-// import { Heatmap } from '../components/performance/Heatmap';
-import Worldmap from '../components/performance/Worldmap';
+import { Container, Row, Col } from 'reactstrap';
+
 import LineAndBarsChart from '../components/performance/LineAndBarsChart';
+import Linechart from '../components/performance/Linechart';
+import Worldmap from '../components/performance/Worldmap';
 
 class PerformanceContainer extends React.Component {
 
@@ -16,67 +17,32 @@ class PerformanceContainer extends React.Component {
     };
   }
 
-  componentWillMount () {
-    this.fetchOptions = { method: 'GET',
-      headers: {
-       'Content-Type': 'application/json',
-       'Authorization': 'Bearer ' + this.props.access_token
-      },
-      mode: 'cors',
-      cache: 'default'
-    };
-    this.fetchCommentsAndLikes();
-    this.fetchMapData();
-  }
-
-  fetchCommentsAndLikes() {
-
-    const myRequest = new Request('http://localhost:3000/performance?timeframe=day', this.fetchOptions);
-
-    fetch(myRequest)
-      .then((response) => response.json())
-      .then((response) => {
-        // inject into graph
-        const processedData = response.stats.map(el => {
-          return Object.assign({}, el, {
-            date: new Date(el.date)
-          });
-        });
-        this.setState({ commentsAndLikes: processedData })
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  fetchMapData() {
-    const myRequest = new Request('http://localhost:3000/influence', this.fetchOptions);
-
-    fetch(myRequest)
-      .then((response) => response.json())
-      .then((response) => {
-        // inject into graph
-        this.setState({ mapData: response.data })
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
   render () {
-    if(!this.state.commentsAndLikes) return null;
-    if(!this.state.mapData) return null;
+    if(!this.props.performance || this.props.performance.length === 0) return null;
+    if(!this.props.worldMap || this.props.worldMap.length === 0) return null;
     return (
-      <div>
-        <h2>Likes and Comments</h2>
-        <LineAndBarsChart data={this.state.commentsAndLikes} width="800" height="460" />
-        <h2>Followers</h2>
-        <Linechart data={this.state.commentsAndLikes} width="800" height="460" />
+      <Container>
+        <Row>
+          <Col>
+            <h2>Likes and Comments</h2>
+            <LineAndBarsChart data={this.props.performance} width="800" height="460" />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <h2>Followers</h2>
+            <Linechart data={this.props.performance} width="800" height="460" />
+          </Col>
+        </Row>
         {/* <h2>Best time to post</h2>
-        <Heatmap width="800" height="460" /> */}
-        <h2>Map of influence</h2>
-        <Worldmap data={this.state.mapData} width="800" height="460" />
-      </div>
+          <Heatmap width="800" height="460" /> */}
+        <Row>
+          <Col>
+            <h2>Map of influence</h2>
+            <Worldmap data={this.props.worldMap} width="800" height="460" />
+          </Col>
+        </Row>
+      </Container>
     );
   }
 
@@ -84,6 +50,8 @@ class PerformanceContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
   access_token: state.authorization.access_token,
+  performance: state.stats.performance,
+  worldMap: state.stats.worldMap,
 });
 
 const mapDispatchToProps = (dispatch) => ({

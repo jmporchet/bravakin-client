@@ -18,36 +18,63 @@ const authorization = (state = authorizationDefaultState, action) => {
   }
 };
 
-
-
 // This needs to be inside userProfile
 const userProfile = (state = {
   username: '',
   hashtags: [],
   interesting_people: []
 }, action) => {
-  console.log(state)
   switch (action.type) {
     case Types.ADD_PEOPLE:
       return Object.assign({}, state, {
-      interesting_people: state.interesting_people.concat(action.people)
-    });
+        interesting_people: state.interesting_people.concat(action.people)
+      });
     case Types.ADD_HASHTAG:
       return Object.assign({}, state, {
-      hashtags: state.hashtags.concat(action.hashtag)
-    });
+        hashtags: state.hashtags.concat(action.hashtag)
+      });
     case Types.ADD_USER:
       return Object.assign({}, state, {
-      username: state.username.concat(action.user)
-    });
+        username: state.username.concat(action.user.username),
+      });
     default:
-    return state;
+      return state;
+  }
+}
+
+const statsDefaultState = {
+  performance: [],
+  worldMap: [],
+  followers: ''
+}
+
+const stats = (state = statsDefaultState, action) => {
+  switch (action.type) {
+    case Types.ADD_USER:
+      return Object.assign({}, state, {
+        followers: state.followers.concat(action.user.followers)
+      });
+    case Types.SET_PERFORMANCE_DATA:
+      return {
+        ...state,
+        performance: action.data
+      }
+
+    case Types.SET_INFLUENCE_DATA:
+      return {
+        ...state,
+        worldMap: action.data
+      }
+
+    default:
+      return state;
   }
 }
 
 const reducer = combineReducers({
   authorization,
   userProfile,
+  stats,
   form: reduxFormReducer
 });
 

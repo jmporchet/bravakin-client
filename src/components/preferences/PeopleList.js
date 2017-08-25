@@ -30,13 +30,13 @@ class PeopleList extends React.Component {
       }
     };
 
-    fetch("https://private-cb530a-bravakin.apiary-mock.com/me", {
+    fetch("https://localhost:3000/me", {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ACCESS_TOKEN'
+        'Authorization': 'Bearer ' + this.props.access_token
       },
-      body: JSON.stringify(body)
+      body: body
     });
   }
 
@@ -54,6 +54,7 @@ class PeopleList extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  access_token: state.authorization.access_token,
   interesting_people: state.userProfile.interesting_people
 })
 
