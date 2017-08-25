@@ -27,13 +27,6 @@ export default ({
   }
 }) => {
   if (width < 10) return null;
-  data = data.reverse();
-  data.forEach((el, index, data) => {
-    el['engagement'] = (index === 0) ?
-      el.likes + el.comments :
-      data[index-1].engagement + el.likes + el.comments
-    }
-  );
 
   const keys = Object.keys(data[0]).filter(d => d !== 'date' && d !== 'followers' && d !== 'engagement');
   const format = timeFormat("%H");
