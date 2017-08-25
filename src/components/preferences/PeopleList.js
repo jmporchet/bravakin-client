@@ -30,7 +30,7 @@ class PeopleList extends React.Component {
       }
     };
 
-    fetch("https://localhost:3000/me", {
+    fetch("http://192.168.0.49:3000/me", {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json',

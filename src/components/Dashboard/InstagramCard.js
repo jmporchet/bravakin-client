@@ -83,7 +83,6 @@ class InstagramCard extends Component {
   onThrowOut = (e)=> {
     const cardId = e.target.getAttribute('id').split('card')[1];
     const media = this.state.cards[cardId];
-    console.log(media);
 
     if(e.throwDirection === Direction.LEFT) {
 
@@ -169,7 +168,8 @@ class InstagramCard extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  hashtags: state.userProfile.hashtags
+  hashtags: state.userProfile.like_tags,
+  access_token: state.authorization.access_token
 })
 
 export default connect(mapStateToProps)(InstagramCard);
