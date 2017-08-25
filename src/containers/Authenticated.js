@@ -88,6 +88,10 @@ class Authenticated extends React.Component {
         );
         processedData = processedData.reverse();
 
+        let followerCount = this.props.followers;
+        processedData.forEach(el => {
+          el.followers = followerCount - el.followers;
+        });
 
         // hack to display 24 hours even if missing data at the end.
         // TODO: account for missing data in the middle of the data set too
@@ -122,6 +126,7 @@ class Authenticated extends React.Component {
 
 const mapStateToProps = (state) => ({
   username: state.userProfile.username,
+  followers: state.stats.followers,
   access_token: state.authorization.access_token
 });
 
