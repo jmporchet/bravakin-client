@@ -1,5 +1,15 @@
 import React from 'react';
+import InstagramCard from './Dashboard/InstagramCard';
 
-const Dashboard = () => <div><h1>Dashboard</h1></div>;
+class Dashboard extends React.Component {
+    render() {
+        return(
+            <div>
+                <InstagramCard />
+            </div>
+        )
+    }
+}
+
 
 export default Dashboard;

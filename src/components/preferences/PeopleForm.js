@@ -18,7 +18,6 @@ const PeopleForm = props => {
             className="form-control"
             placeholder="User"
             />
-
         </div>
       </div>
       <br/>

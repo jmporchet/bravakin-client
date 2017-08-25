@@ -9,12 +9,12 @@ import { ListGroup, ListGroupItem } from 'reactstrap';
 class HashtagList extends React.Component {
 
   renderHashtags () {
-    return this.props.hashtags.map((el, index) => <ListGroupItem key={index}>{el}</ListGroupItem>)
+    return this.props.hashtags.map((el, index) => <li key={index}>#{el}</li>)
   };
 
   handleSubmit = (formData) => {
     const { hashtags } = formData;
-    this.props.addHashtag('#' + hashtags);
+    this.props.addHashtag(hashtags);
 
     var body = {
       'update': {

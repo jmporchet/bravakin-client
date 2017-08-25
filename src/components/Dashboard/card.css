@@ -1,0 +1,68 @@
+html,
+body,
+ul,
+li {
+       margin: 0; padding: 0;
+}
+body {
+       background: #FCD424; font: normal 16px/24px 'Helvetica Neue', Helvetica, Arial, freesans, sans-serif;
+}
+
+#viewport {
+       width: 500px; height: 500px; background: #FFF; border: 10px solid #FFF; margin: 100px auto 0; position: relative;
+}
+
+#viewport .loading-container {
+       margin: 90px auto;
+       height: 300px;
+       width: 300px;
+       background-color: rgba(250, 222, 0, 1);
+       border-radius: 100%;
+}
+#viewport .loading{
+       margin: 50px 50px;
+       height: 200px;
+       width: 200px;
+
+}
+#viewport .stack {
+       width: 290px;
+       height: 390px;
+       position: absolute;
+       top: 46px;
+       left: 95px;
+}
+#viewport .card {
+       width: 290px; height: 390px; list-style: none; border-top: 25px solid white; border-bottom: 25px solid white; background-color: white; position: absolute; top: 0; left: 0; box-shadow: 0 0 2px rgba(0,0,0,.2), 1px 1px 1px rgba(0,0,0,.2); text-align: center; color: #FFF; font-size: 20px; box-sizing: border-box; cursor: default;
+}
+
+#viewport .info {
+       width: 50px; height: 50px; background-color: red;
+}
+
+#viewport .in-deck:nth-child(3) {
+       top: 2px; transform: translate(2px, 2px) rotate(0.4deg);
+}
+#viewport .in-deck:nth-child(2) {
+       top: 4px; transform: translate(-4px, -2px) rotate(-1deg);
+}
+.control {
+       text-align: center; font-size: 0; margin: 20px;
+}
+.control button {
+       background: #FFFFFF; color: #373737; font-weight: bold; border: none; font: normal 18px/24px 'Helvetica Neue', Helvetica, Arial, freesans, sans-serif; margin: 0 5px; padding: 10px 15px; cursor: pointer; box-shadow: 0 2px 0 #63211F; outline: none; position: relative;
+}
+.control button:active {
+       background: #63211F; color: #FFFFFF; bottom: -2px; box-shadow: none;
+}
+.source {
+       width: 500px; margin: 20px auto;
+}
+.source a {
+       color: #C7433E;
+}
+
+.card {
+       border-radius: 0px !important;
+       border-color: white !important;
+}

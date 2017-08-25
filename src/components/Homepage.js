@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import conf from '../private/conf';
 import FontAwesome from 'react-fontawesome';
 import { Row, Col, Button } from 'reactstrap';
-import './style.css';
+import  './style.css';
 
 class Homepage extends React.Component {
 
