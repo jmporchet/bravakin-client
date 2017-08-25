@@ -12,6 +12,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import reducer from './reducer';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
+import './style.css'
+
 injectTapEventPlugin();
 
 const persistedState = loadState();
@@ -25,7 +27,8 @@ let store = createStore(
 
 store.subscribe(throttle(() => {
   saveState({
-    authorization: store.getState().authorization
+    authorization: store.getState().authorization,
+    userProfile: store.getState().userProfile
   })
 }), 1000);
 

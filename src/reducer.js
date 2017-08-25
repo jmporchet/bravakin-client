@@ -34,9 +34,7 @@ const userProfile = (state = {
         hashtags: state.hashtags.concat(action.hashtag)
       });
     case Types.ADD_USER:
-      return Object.assign({}, state, {
-        username: state.username.concat(action.user.username),
-      });
+      return Object.assign({}, state, action.user);
     default:
       return state;
   }

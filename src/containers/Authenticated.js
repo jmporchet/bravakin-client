@@ -96,7 +96,6 @@ class Authenticated extends React.Component {
         let followerCount = 243;
         // processedData.forEach((el, index) => {
         for (let i = 0; i < processedData.length; i++) {
-          console.log(`${i}:`, followerCount, processedData[i].followers, followerCount - processedData[i].followers);
           const newFollowerCount = followerCount - processedData[i].followers;
           processedData[i].followers = followerCount;
           followerCount = newFollowerCount;

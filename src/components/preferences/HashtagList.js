@@ -27,13 +27,13 @@ class HashtagList extends React.Component {
       }
     };
 
-    fetch("https://localhost:3000/me", {
+    fetch("http://192.168.0.49:3000/me", {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + this.props.access_token
       },
-      body: body
+      body: JSON.stringify(body)
     });
   }
 
@@ -52,7 +52,7 @@ class HashtagList extends React.Component {
 
 const mapStateToProps = (state) => ({
   access_token: state.authorization.access_token,
-  hashtags: state.userProfile.hashtags,
+  hashtags: state.userProfile.like_tags,
   interesting_people: state.userProfile.interesting_people
 })
 

@@ -8,21 +8,21 @@ class UserInfo extends React.Component {
   render() {
     return(
       <div>
-        <div class="text-center">
-          <img id="img" src="https://pbs.twimg.com/profile_images/788146002029150209/n3EHvo8D.jpg" class="rounded" alt="..." />
-          </div>
-          <h1>{this.props.username}</h1>
+        <div className="text-center">
+          <img id="img" src={this.props.user.profile_picture} alt="profile picture" />
         </div>
-      );
-    }
+        <h1>{this.props.user.username}</h1>
+      </div>
+    );
   }
+}
 
-  const mapStateToProps = (state) => ({
-    username: state.userProfile.username
-  })
+const mapStateToProps = (state) => ({
+  user: state.userProfile
+})
 
-  const mapDispatchToProps = (dispatch) => ({
-    addUser: (user) => dispatch(addUser(user))
-  })
+const mapDispatchToProps = (dispatch) => ({
+  addUser: (user) => dispatch(addUser(user))
+})
 
-  export default connect(mapStateToProps, mapDispatchToProps)(UserInfo)
+export default connect(mapStateToProps, mapDispatchToProps)(UserInfo)

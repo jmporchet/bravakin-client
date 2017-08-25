@@ -9,7 +9,7 @@ body {
 }
 
 #viewport {
-       width: 500px; height: 500px; background: #FFF; border: 10px solid #FFF; margin: 100px auto 0; position: relative;
+       width: 500px; height: 500px; margin: 100px auto 0; position: relative;
 }
 
 #viewport .loading-container {
