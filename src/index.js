@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import { loadState, saveState } from './localStorage'
+import throttle from 'lodash/throttle';
 
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -12,11 +14,20 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
 
+const persistedState = loadState();
+
 let store = createStore(
-  reducer, window.__REDUX_DEVTOOLS_EXTENSION__ &&
+  reducer,
+  persistedState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ &&
   window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+store.subscribe(throttle(() => {
+  saveState({
+    authorization: store.getState().authorization
+  })
+}), 1000);
 
 ReactDOM.render(
   <Provider store={store}>
