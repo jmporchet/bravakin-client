@@ -5,9 +5,9 @@ import  './bootstrap.css';
 
 
 const UserSettings = props => {
-  const { handleSubmit } = props;
+  const { onSubmit } = props;
   return(
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={onSubmit}>
       <div>
         <label> Password </label>
         <div>

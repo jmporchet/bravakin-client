@@ -18,8 +18,8 @@ class PerformanceContainer extends React.Component {
   }
 
   render () {
-    if(!this.props.performance) return null;
-    if(!this.props.worldMap) return null;
+    if(!this.props.performance || this.props.performance.length === 0) return null;
+    if(!this.props.worldMap || this.props.worldMap.length === 0) return null;
     return (
       <Container>
         <Row>

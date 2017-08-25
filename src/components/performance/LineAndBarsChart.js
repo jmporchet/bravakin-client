@@ -12,6 +12,7 @@ import { Grid } from '@vx/grid';
 // accessors
 const xDate = d => d.date;
 const yLine = d => d.engagement;
+const yBar = d => Math.max(d.likes, d.comments)
 
 export default ({
   data,
@@ -39,7 +40,7 @@ export default ({
   // hours on x axis
   const x0Scale = scaleBand({
     rangeRound: [0, xMax],
-    domain: data.reverse().map(xDate),
+    domain: data.map(xDate),
     padding: 0.1,
     tickFormat: () => (val) => formatDate(val)
   });
@@ -66,6 +67,11 @@ export default ({
     domain: [0, max(data, yLine)],
     nice: true,
   });
+  const yBarScale = scaleLinear({
+    range: [yMax ,0],
+    domain: [0, max(data, yBar)],
+    nice: true,
+  })
 
   // responsive utils for axis ticks
   function numTicksForHeight(height) {
@@ -148,7 +154,7 @@ export default ({
         x0={xDate}
         x0Scale={x0Scale}
         x1Scale={x1Scale}
-        yScale={yLineScale}
+        yScale={yBarScale}
         zScale={zScale}
         rx={4}
       />

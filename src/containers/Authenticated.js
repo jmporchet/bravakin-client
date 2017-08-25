@@ -19,7 +19,6 @@ class Authenticated extends React.Component {
     this.state = { access_token: null };
   }
 
-
   componentWillMount () {
     this.fetchOptions = {
       method: 'GET',
@@ -55,9 +54,8 @@ class Authenticated extends React.Component {
     }
   }
 
-
   fetchUserData () {
-    fetch(new Request('http://localhost:3000/me', this.fetchOptions))
+    fetch(new Request('http://192.168.0.49:3000/me', this.fetchOptions))
     .then((response) => response.json())
     .then((response) => {
       this.props.addUser(response);
@@ -68,7 +66,7 @@ class Authenticated extends React.Component {
   }
 
   fetchCommentsAndLikes () {
-    fetch(new Request('http://localhost:3000/performance?timeframe=day', this.fetchOptions))
+    fetch(new Request('https://private-a0d63-bravakin.apiary-mock.com/performance?timeframe=day', this.fetchOptions))
       .then((response) => response.json())
       .then((response) => {
         let processedData = response.stats.map(el => {
@@ -80,18 +78,30 @@ class Authenticated extends React.Component {
 
         // sort from oldest to newest to calculate engagement
         processedData = processedData.sort((a,b) => a.date - b.date);
+        // fake data for testing purposes
+        // processedData.forEach((el, i) => {
+        //   el.comments = Math.floor(Math.random()*2)
+        //   el.likes = Math.floor(Math.random()*4)
+        //   el.followers = Math.floor(Math.random()*2)
+        // })
         processedData.forEach((el, index) => {
           el['engagement'] = (index === 0) ?
             el.likes + el.comments :
             processedData[index-1].engagement + el.likes + el.comments
           }
         );
-        processedData = processedData.reverse();
 
-        let followerCount = this.props.followers;
-        processedData.forEach(el => {
-          el.followers = followerCount - el.followers;
-        });
+
+        processedData.reverse();
+        let followerCount = 243;
+        // processedData.forEach((el, index) => {
+        for (let i = 0; i < processedData.length; i++) {
+          console.log(`${i}:`, followerCount, processedData[i].followers, followerCount - processedData[i].followers);
+          const newFollowerCount = followerCount - processedData[i].followers;
+          processedData[i].followers = followerCount;
+          followerCount = newFollowerCount;
+        }
+        processedData.reverse();
 
         // hack to display 24 hours even if missing data at the end.
         // TODO: account for missing data in the middle of the data set too
@@ -113,7 +123,7 @@ class Authenticated extends React.Component {
   }
 
   fetchMapData() {
-    fetch(new Request('http://localhost:3000/influence', this.fetchOptions))
+    fetch(new Request('https://private-a0d63-bravakin.apiary-mock.com/influence', this.fetchOptions))
       .then((response) => response.json())
       .then((response) => {
         this.props.setInfluenceData(response.data)
@@ -125,7 +135,7 @@ class Authenticated extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  username: state.userProfile.username,
+  username: state.userProfile,
   followers: state.stats.followers,
   access_token: state.authorization.access_token
 });
