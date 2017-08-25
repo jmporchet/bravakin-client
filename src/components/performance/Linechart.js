@@ -10,7 +10,7 @@ import { extent, max } from 'd3-array';
 
 // accessors
 const x = d => d.date;
-const y = d => d.likes;
+const y = d => d.followers;
 
 // responsive utils for axis ticks
 function numTicksForHeight(height) {
@@ -20,9 +20,9 @@ function numTicksForHeight(height) {
 }
 
 function numTicksForWidth(width) {
-  if (width <= 300) return 2;
-  if (300 < width && width <= 400) return 5;
-  return 10;
+  if (width <= 300) return 3;
+  if (300 < width && width <= 400) return 6;
+  return 8;
 }
 
 export default ({
@@ -33,7 +33,7 @@ export default ({
     top: 10,
     left: 50,
     right: 20,
-    bottom: 110,
+    bottom: 100,
   },
 }) => {
   // bounds
@@ -102,6 +102,7 @@ export default ({
         xScale={xScale}
         yScale={yScale}
         stroke='#8a265f'
+        strokeDasharray='1,15'
         width={xMax}
         height={yMax}
         numTicksRows={numTicksForHeight(height)}
@@ -146,9 +147,7 @@ export default ({
             textAnchor="middle"
             fontSize={10}
             fontFamily="Arial"
-            >
-              time
-            </text>
+          />
           }
           stroke={'#1b1a1e'}
           tickStroke={'#1b1a1e'}
