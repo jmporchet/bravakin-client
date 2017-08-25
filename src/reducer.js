@@ -27,16 +27,16 @@ const userProfile = (state = {
   switch (action.type) {
     case Types.ADD_PEOPLE:
       return Object.assign({}, state, {
-      interesting_people: state.interesting_people.concat(action.people)
-    });
+        interesting_people: state.interesting_people.concat(action.people)
+      });
     case Types.ADD_HASHTAG:
       return Object.assign({}, state, {
-      hashtags: state.hashtags.concat(action.hashtag)
-    });
+        hashtags: state.hashtags.concat(action.hashtag)
+      });
     case Types.ADD_USER:
       return Object.assign({}, state, {
-      username: state.username.concat(action.user)
-    });
+        username: state.username.concat(action.user.username),
+      });
     default:
       return state;
   }
@@ -45,23 +45,26 @@ const userProfile = (state = {
 const statsDefaultState = {
   performance: [],
   worldMap: [],
+  followers: ''
 }
 
 const stats = (state = statsDefaultState, action) => {
   switch (action.type) {
+    case Types.ADD_USER:
+      return Object.assign({}, state, {
+        followers: state.followers.concat(action.user.followers)
+      });
     case Types.SET_PERFORMANCE_DATA:
       return {
         ...state,
         performance: action.data
       }
-      break;
 
     case Types.SET_INFLUENCE_DATA:
       return {
         ...state,
         worldMap: action.data
       }
-      break;
 
     default:
       return state;

@@ -18,20 +18,20 @@ class PerformanceContainer extends React.Component {
   }
 
   render () {
-    if(!this.state.commentsAndLikes) return null;
-    if(!this.state.mapData) return null;
+    if(!this.props.performance) return null;
+    if(!this.props.worldMap) return null;
     return (
       <Container>
         <Row>
           <Col>
             <h2>Likes and Comments</h2>
-            <LineAndBarsChart data={this.state.commentsAndLikes} width="800" height="460" />
+            <LineAndBarsChart data={this.props.performance} width="800" height="460" />
           </Col>
         </Row>
         <Row>
           <Col>
             <h2>Followers</h2>
-            <Linechart data={this.state.commentsAndLikes} width="800" height="460" />
+            <Linechart data={this.props.performance} width="800" height="460" />
           </Col>
         </Row>
         {/* <h2>Best time to post</h2>
@@ -39,7 +39,7 @@ class PerformanceContainer extends React.Component {
         <Row>
           <Col>
             <h2>Map of influence</h2>
-            <Worldmap data={this.state.mapData} width="800" height="460" />
+            <Worldmap data={this.props.worldMap} width="800" height="460" />
           </Col>
         </Row>
       </Container>
@@ -50,6 +50,8 @@ class PerformanceContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
   access_token: state.authorization.access_token,
+  performance: state.stats.performance,
+  worldMap: state.stats.worldMap,
 });
 
 const mapDispatchToProps = (dispatch) => ({

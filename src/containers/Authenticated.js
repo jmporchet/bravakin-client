@@ -57,10 +57,10 @@ class Authenticated extends React.Component {
 
 
   fetchUserData () {
-    fetch(new Request('https://localhost:3000/me', this.fetchOptions))
+    fetch(new Request('http://localhost:3000/me', this.fetchOptions))
     .then((response) => response.json())
     .then((response) => {
-      this.props.addUser(response.data.username);
+      this.props.addUser(response);
     })
     .catch((error) => {
       console.error(error);
@@ -71,12 +71,37 @@ class Authenticated extends React.Component {
     fetch(new Request('http://localhost:3000/performance?timeframe=day', this.fetchOptions))
       .then((response) => response.json())
       .then((response) => {
-        const processedData = response.stats.map(el => {
+        let processedData = response.stats.map(el => {
           return Object.assign({}, el, {
-            date: new Date(el.date)
+            // convert the date to a UTC string
+            date: new Date(el.date+'Z')
           });
         });
-        this.props.setPerformanceData(processedData)
+
+        // sort from oldest to newest to calculate engagement
+        processedData = processedData.sort((a,b) => a.date - b.date);
+        processedData.forEach((el, index) => {
+          el['engagement'] = (index === 0) ?
+            el.likes + el.comments :
+            processedData[index-1].engagement + el.likes + el.comments
+          }
+        );
+        processedData = processedData.reverse();
+
+
+        // hack to display 24 hours even if missing data at the end.
+        // TODO: account for missing data in the middle of the data set too
+        for (let i = 0; i < 24; i++) {
+          if (!processedData[i]) {
+            processedData[i] = Object.assign({}, processedData[i-1]);
+            processedData[i].date = new Date(processedData[i-1].date - 60*60*1000)
+            processedData[i].likes = 0
+            processedData[i].comments = 0
+            processedData[i].followers = 0
+          }
+        }
+
+        this.props.setPerformanceData(processedData);
       })
       .catch((error) => {
         console.error(error);
